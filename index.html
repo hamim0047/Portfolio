@@ -55,19 +55,20 @@
       color: var(--accent-color);
       font-weight: 700;
     }
-
     nav {
       display: flex;
-      gap: 1.5rem;
+      gap: 0;
     }
     nav a {
       color: var(--text-color);
+      margin-left: 1.5rem;
       text-decoration: none;
       font-weight: 500;
       padding-bottom: 2px;
       transition: color 0.3s ease, border-bottom 0.3s ease;
       user-select: none;
       position: relative;
+      white-space: nowrap;
     }
     nav a:hover {
       color: var(--accent-color);
@@ -79,17 +80,68 @@
       font-weight: 700;
     }
 
-    /* Hamburger Menu (hidden on desktop) */
-    #menu-toggle {
+    /* Hamburger button styles */
+    .hamburger {
       display: none;
-    }
-    #menu-label {
-      display: none;
-      font-size: 1.8rem;
-      color: var(--accent-color);
+      flex-direction: column;
+      justify-content: space-around;
+      width: 25px;
+      height: 22px;
       cursor: pointer;
       user-select: none;
     }
+    .hamburger div {
+      width: 100%;
+      height: 3px;
+      background-color: var(--accent-color);
+      border-radius: 2px;
+      transition: all 0.3s ease;
+    }
+    /* Animate hamburger to X when active */
+    .hamburger.active div:nth-child(1) {
+      transform: rotate(45deg) translate(5px, 5px);
+    }
+    .hamburger.active div:nth-child(2) {
+      opacity: 0;
+    }
+    .hamburger.active div:nth-child(3) {
+      transform: rotate(-45deg) translate(5px, -5px);
+    }
+
+    /* Mobile styles */
+    @media (max-width: 768px) {
+      nav {
+        position: fixed;
+        top: 60px;
+        left: 0;
+        right: 0;
+        background-color: #1b1b1b;
+        flex-direction: column;
+        overflow: hidden;
+        max-height: 0;
+        transition: max-height 0.3s ease;
+        box-shadow: 0 4px 15px var(--shadow-color);
+        border-radius: 0 0 12px 12px;
+      }
+      nav.open {
+        max-height: 300px; /* enough for all links */
+      }
+      nav a {
+        margin: 1rem 2rem;
+        font-size: 1.2rem;
+        border-bottom: none !important;
+      }
+      nav a.active,
+      nav a:hover {
+        border-bottom: none !important;
+        color: var(--accent-color);
+      }
+      .hamburger {
+        display: flex;
+      }
+    }
+
+    /* Rest of your existing CSS... */
 
     section {
       min-height: 100vh;
@@ -111,6 +163,7 @@
       transform: translateY(0);
     }
 
+    /* Home section */
     #home {
       background: transparent;
       text-align: center;
@@ -139,7 +192,7 @@
       user-select: none;
       min-height: 2.4rem; /* prevent layout jump */
       letter-spacing: 0.05em;
-      white-space: nowrap; /* Keep single line on desktop */
+      white-space: nowrap;
     }
 
     @keyframes fadeSlideIn {
@@ -314,86 +367,13 @@
       user-select: none;
     }
 
-    /* Responsive Styles */
-
-    @media (max-width: 900px) {
-      section {
-        margin: 6rem 1.5rem 3rem;
-        padding: 2.5rem 1.5rem 3rem;
-      }
-    }
-
+    /* Responsive home */
     @media (max-width: 600px) {
-      header {
-        padding: 1rem 1rem;
-      }
-      header h1 {
-        font-size: 1.5rem;
-      }
-
-      /* Show hamburger menu */
-      #menu-label {
-        display: block;
-      }
-      nav {
-        position: fixed;
-        top: 60px;
-        right: 0;
-        background-color: var(--card-background);
-        flex-direction: column;
-        width: 220px;
-        max-width: 80vw;
-        height: calc(100vh - 60px);
-        padding: 1rem 1.5rem;
-        transform: translateX(100%);
-        transition: transform 0.3s ease;
-        box-shadow: -3px 0 8px rgba(0, 0, 0, 0.7);
-        border-radius: 0 0 0 12px;
-        user-select: none;
-      }
-      nav a {
-        margin: 0 0 1.5rem 0;
-        font-size: 1.15rem;
-        padding-bottom: 0;
-      }
-      nav a.active {
-        border-bottom: none;
-        font-weight: 700;
-        color: var(--accent-color);
-      }
-
-      /* Changed '+' to '~' here */
-      #menu-toggle:checked ~ nav {
-        transform: translateX(0);
-      }
-
-      /* Hide nav links by default on mobile */
-      nav a:hover {
-        color: var(--pr-color);
-        border-bottom: none;
-      }
-
-      /* Fix body scroll when menu open */
-      body.menu-open {
-        overflow: hidden;
-      }
-
-      /* Adjust section margins for mobile */
-      section {
-        margin: 5rem 1rem 3rem;
-        padding: 2rem 1rem 2rem;
-      }
-
       #home h1 {
         font-size: 3rem;
       }
       #home p#typing-text {
         font-size: 1.3rem;
-
-        /* Allow wrapping on mobile */
-        white-space: normal;
-        word-break: break-word;
-        line-height: 1.3;
       }
       #about img {
         width: 150px;
@@ -405,9 +385,15 @@
 <body>
   <header>
     <h1>Hamim's Portfolio</h1>
-    <input type="checkbox" id="menu-toggle" />
-    <label for="menu-toggle" id="menu-label">&#9776;</label>
-    <nav>
+
+    <!-- Hamburger button for mobile -->
+    <div class="hamburger" id="hamburger" aria-label="Toggle navigation" role="button" tabindex="0">
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+
+    <nav id="nav-menu">
       <a href="#home" class="nav-link">Home</a>
       <a href="#about" class="nav-link">About</a>
       <a href="#skills" class="nav-link">Skills</a>
@@ -418,7 +404,7 @@
   </header>
 
   <section id="home" class="visible">
-    <h1>HAMIM</h1>
+    <h1>Hamim</h1>
     <p id="typing-text"></p>
   </section>
 
@@ -441,6 +427,7 @@
   <section id="skills" class="visible">
     <div class="section-title">Skills</div>
     <div class="section-content">
+      <!-- Skills here -->
       <div class="skill">
         <div class="skill-name">
           <span>Java</span><span>95%</span>
@@ -449,6 +436,7 @@
           <div class="skill-level" style="width: 95%"></div>
         </div>
       </div>
+      <!-- Repeat for other skills -->
       <div class="skill">
         <div class="skill-name">
           <span>Python</span><span>85%</span>
@@ -547,10 +535,6 @@
         <p><strong>Tuition Fee Calculator:</strong> 
           Web app to calculate tuition fees based on credit and discount logic.</p>
       </div>
-      <div class="card"> <p><strong>SoccerBot:</strong> 
-        soccer-playing robot developed for National SoccerBot competitions.</p> 
-      </div>
-
     </div>
   </section>
 
@@ -558,12 +542,19 @@
     <div class="section-title">Experience</div>
     <div class="card-container">
       <div class="card">
-        <p><strong>Intern, Software Engineer</strong> — XYZ Tech, June 2024 - Aug 2024</p>
-        <p>Developed JavaFX educational game modules and contributed to backend REST APIs.</p>
+        <p><strong>Senior Executive</strong> - UIU Robotics Club</p>
       </div>
       <div class="card">
-        <p><strong>Student Project Lead</strong> — University, 2023 - Present</p>
-        <p>Leading a team of 5 to build an AI-powered mental health web platform.</p>
+        <p><strong>Executive</strong> - UIU Sports Club</p>
+      </div>
+      <div class="card">
+        <p><strong>Volunteer</strong> - UIU CSE Project</p>
+      </div>
+      <div class="card">
+        <p><strong>Participant</strong> - KUET CSE Fest (SoccerBot)</p>
+      </div>
+      <div class="card">
+        <p><strong>Participant</strong> - UIU CSE Fest (SoccerBot)</p>
       </div>
     </div>
   </section>
@@ -571,40 +562,92 @@
   <section id="contact" class="visible">
     <div class="section-title">Contact</div>
     <div class="section-content">
-      <p>Email: <a href="mailto:hamim@example.com">hamim@example.com</a></p>
-      <p>LinkedIn: <a href="https://linkedin.com/in/hamim" target="_blank" rel="noopener noreferrer">linkedin.com/in/hamim</a></p>
-      <p>GitHub: <a href="https://github.com/hamim" target="_blank" rel="noopener noreferrer">github.com/hamim</a></p>
+      <p>Email: <a href="mailto:hamim2310047@bscse.uiu.ac.bd">hamim2310047@bscse.uiu.ac.bd</a></p>
+      <p>GitHub: <a href="https://github.com/hamim0047" target="_blank">github.com/hamim0047</a></p>
+      <p>LinkedIn: <a href="https://linkedin.com/in/muhammad-hamim-196466277/" target="_blank">linkedin.com/in/muhammad-hamim</a></p>
     </div>
   </section>
 
-  <footer>
-    &copy; 2025 Hamim. All rights reserved.
-  </footer>
+  <footer>&copy; 2025 Muhammad Hamim. All rights reserved.</footer>
 
   <script>
-    // Typing effect
-    const text = "Full-Stuck Developer | Problem Solver";
-    const typingText = document.getElementById("typing-text");
-    let index = 0;
+    // Intersection Observer for fade-in on scroll
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
 
-    function type() {
-      if (index < text.length) {
-        typingText.textContent += text.charAt(index);
-        index++;
-        setTimeout(type, 120);
+    document.querySelectorAll("section").forEach((section) => {
+      observer.observe(section);
+    });
+
+    // Scrollspy for nav highlight
+    const sections = document.querySelectorAll("section");
+    const navLinks = document.querySelectorAll("nav a");
+
+    function activateNavLink() {
+      let currentIndex = sections.length - 1;
+
+      for (let i = 0; i < sections.length; i++) {
+        const sectionTop = sections[i].getBoundingClientRect().top;
+        if (sectionTop > window.innerHeight / 3) {
+          currentIndex = i - 1;
+          break;
+        }
+      }
+      if (currentIndex < 0) currentIndex = 0;
+
+      navLinks.forEach((link) => link.classList.remove("active"));
+      if (navLinks[currentIndex]) {
+        navLinks[currentIndex].classList.add("active");
       }
     }
-    window.onload = type;
 
-    // Close menu on nav link click (for mobile)
-    const menuToggle = document.getElementById("menu-toggle");
-    const navLinks = document.querySelectorAll("nav a");
-    navLinks.forEach(link => {
-      link.addEventListener("click", () => {
-        if (menuToggle.checked) {
-          menuToggle.checked = false;
-        }
-      });
+    window.addEventListener("scroll", activateNavLink);
+    window.addEventListener("load", activateNavLink);
+
+    // Typing effect for home subtitle
+    const typingText = "Full-Stuck Developer | Problem Solver";
+    const typingElement = document.getElementById("typing-text");
+    let charIndex = 0;
+
+    function typeLetter() {
+      if (charIndex < typingText.length) {
+        typingElement.textContent += typingText.charAt(charIndex);
+        charIndex++;
+        setTimeout(typeLetter, 100); // typing speed: 100ms per letter
+      }
+    }
+
+    window.addEventListener("load", () => {
+      // Clear text first
+      typingElement.textContent = "";
+      charIndex = 0;
+      typeLetter();
+    });
+
+    // Hamburger toggle
+    const hamburger = document.getElementById("hamburger");
+    const navMenu = document.getElementById("nav-menu");
+
+    hamburger.addEventListener("click", () => {
+      hamburger.classList.toggle("active");
+      navMenu.classList.toggle("open");
+    });
+
+    // Also support keyboard toggling for accessibility
+    hamburger.addEventListener("keydown", (e) => {
+      if (e.key === "Enter" || e.key === " ") {
+        e.preventDefault();
+        hamburger.classList.toggle("active");
+        navMenu.classList.toggle("open");
+      }
     });
   </script>
 </body>
