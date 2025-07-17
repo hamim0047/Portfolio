@@ -1,181 +1,561 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Hamim | Portfolio</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Hamim's Portfolio</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap"
+    rel="stylesheet"
+  />
   <style>
+    /* Dark Professional Palette */
+    :root {
+      --accent-color: #3491f4; /* Steel blue */
+      --pr-color: #79b8fa;
+      --background-color: #121212; /* Very dark */
+      --card-background: #1f1f1f; /* Slightly lighter dark */
+      --text-color: #e0e0e0; /* Light gray */
+      --text-light: #a0a0a0; /* Medium gray */
+      --shadow-color: rgba(74, 144, 226, 0.25);
+    }
+
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      font-family: "Montserrat", sans-serif;
+      scroll-behavior: smooth;
+      user-select: text;
     }
-
+    html {
+      scroll-padding-top: 80px;
+    }
     body {
-      background: linear-gradient(135deg, #f0f8ff, #ffe4f2);
-      color: #222;
+      background-color: var(--background-color);
+      color: var(--text-color);
       line-height: 1.6;
+      min-height: 100vh;
     }
-
     header {
-      background: linear-gradient(to right, #1e3a8a, #9333ea);
-      color: white;
-      padding: 60px 20px 40px;
-      text-align: center;
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background-color: #1b1b1b;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 1000;
+      box-shadow: 0 2px 8px var(--shadow-color);
+      user-select: none;
     }
-
-    header img {
-      width: 150px;
-      height: 150px;
-      object-fit: cover;
-      border-radius: 50%;
-      border: 4px solid #fff;
-      margin-bottom: 15px;
-      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
-    }
-
     header h1 {
-      font-size: 3rem;
+      font-size: 1.8rem;
+      color: var(--accent-color);
+      font-weight: 700;
     }
-
-    header p {
-      font-size: 1.3rem;
-      margin-top: 10px;
+    nav a {
+      color: var(--text-color);
+      margin-left: 1.5rem;
+      text-decoration: none;
+      font-weight: 500;
+      padding-bottom: 2px;
+      transition: color 0.3s ease, border-bottom 0.3s ease;
+      user-select: none;
+      position: relative;
+    }
+    nav a:hover {
+      color: var(--accent-color);
+      border-bottom: 2px solid var(--accent-color);
+    }
+    nav a.active {
+      color: var(--accent-color);
+      border-bottom: 2px solid var(--accent-color);
+      font-weight: 700;
     }
 
     section {
-      padding: 40px 20px;
-      max-width: 1000px;
-      margin: auto;
-    }
-
-    h2 {
-      background: linear-gradient(to right, #3b82f6, #9333ea);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      font-size: 2.2rem;
-      margin-bottom: 25px;
-      border-left: 5px solid #3b82f6;
-      padding-left: 12px;
-    }
-
-    .about p {
-      font-size: 1.15rem;
-      background: #ffffffee;
-      padding: 25px;
+      min-height: 100vh;
+      padding: 3rem 2rem 4rem;
+      max-width: 900px;
+      margin: 6rem auto 3rem;
+      display: flex;
+      flex-direction: column;
+      background-color: var(--card-background);
       border-radius: 12px;
-      box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+      box-shadow: 0 4px 15px var(--shadow-color);
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.6s ease;
+      user-select: text;
+    }
+    section.visible {
+      opacity: 1;
+      transform: translateY(0);
     }
 
-    .projects .project {
-      background: linear-gradient(145deg, #fdfbfb, #ebedee);
-      padding: 25px;
-      margin-bottom: 20px;
-      border-radius: 15px;
-      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.08);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    #home {
+      background: transparent;
+      text-align: center;
+      justify-content: center;
+      align-items: center;
+      margin: 6rem auto 3rem;
+      max-width: none;
+      padding: 6rem 2rem 4rem;
+      color: var(--accent-color);
+      font-weight: 700;
+      user-select: text;
+      overflow: hidden;
+    }
+    #home h1 {
+      font-size: 4.5rem;
+      margin-bottom: 0.5rem;
+      opacity: 0;
+      transform: translateY(40px);
+      animation: fadeSlideIn 1s ease forwards 0.3s;
+    }
+    /* Replaced the old #home p CSS with this for typing effect */
+    #home p#typing-text {
+      font-size: 1.8rem;
+      color: var(--text-light);
+      font-weight: 500;
+      margin-top: 0.3rem;
+      user-select: none;
+      min-height: 2.4rem; /* prevent layout jump */
+      letter-spacing: 0.05em;
+      white-space: nowrap;
     }
 
-    .projects .project:hover {
-      transform: translateY(-6px);
-      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.12);
+    /* Text fade and slide in */
+    @keyframes fadeSlideIn {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
-    .projects .project h3 {
-      margin-bottom: 12px;
-      color: #7c3aed;
+    #about {
+      text-align: center;
+    }
+    /* Profile Picture with professional double border frame */
+    #about img {
+  width: 260px;
+  height: 260px;
+  object-fit: cover;
+  border-radius: 50%;
+  margin-bottom: 1.5rem;
+  border: 6px solid var(--accent-color);
+  box-shadow:
+    0 0 20px rgba(74, 144, 226, 0.7),
+    0 0 0 8px var(--card-background),
+    0 4px 20px rgba(0, 0, 0, 0.5);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  user-select: none;
+}
+#about img:hover {
+  transform: scale(1.07);
+  box-shadow:
+    0 0 25px rgba(74, 144, 226, 0.9),
+    0 0 0 8px var(--card-background),
+    0 8px 28px rgba(0, 0, 0, 0.6);
+}
+
+    .section-title {
+      font-size: 2.4rem;
+      margin-bottom: 1.5rem;
+      color: var(--accent-color);
+      text-transform: uppercase;
+      font-weight: 700;
+      align-self: flex-start;
+      user-select: none;
+    }
+    .section-content {
+      width: 100%;
+      max-width: 900px;
+      text-align: left;
+      line-height: 1.7;
+      font-size: 1.1rem;
+      color: var(--text-light);
+      margin-bottom: 2rem;
+      user-select: text;
+    }
+    a {
+      color: var(--accent-color);
+      user-select: text;
+    }
+    a:hover {
+      color: #78a9ff;
     }
 
-    .projects .project p {
+    /* Button */
+    .btn {
+      background: var(--accent-color);
+      color: #121212;
+      padding: 0.6rem 1.4rem;
+      border-radius: 6px;
+      font-weight: 700;
+      text-decoration: none;
+      margin-top: 1.5rem;
+      display: inline-block;
+      transition: background 0.3s ease, box-shadow 0.3s ease;
+      user-select: none;
+      box-shadow: 0 3px 8px rgba(74, 144, 226, 0.5);
+    }
+    .btn:hover {
+      background: #78a9ff;
+      box-shadow: 0 5px 12px rgba(120, 169, 255, 0.7);
+      color: #121212;
+    }
+
+    /* Responsive home */
+    @media (max-width: 600px) {
+      #home h1 {
+        font-size: 3rem;
+      }
+      #home p#typing-text {
+        font-size: 1.3rem;
+      }
+      #about img {
+        width: 150px;
+        height: 150px;
+      }
+    }
+
+    /* Skills */
+    .skill {
+      margin-bottom: 1.4rem;
+      width: 100%;
+      max-width: 900px;
+    }
+    .skill-name {
+      display: flex;
+      justify-content: space-between;
+      font-weight: 600;
+      margin-bottom: 0.4rem;
+      color: var(--accent-color);
+      font-size: 1rem;
+      user-select: text;
+    }
+    .skill-bar {
+      background: #333333;
+      border-radius: 20px;
+      overflow: hidden;
+      height: 15px;
+      box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.7);
+    }
+    .skill-level {
+      height: 100%;
+      background: var(--pr-color);
+      width: 0;
+      border-radius: 20px;
+      transition: width 1.2s ease-in-out;
+      box-shadow: 0 0 8px rgba(74, 144, 226, 0.7);
+    }
+
+    /* Project & Experience Containers */
+    .card-container {
+      width: 100%;
+      max-width: 900px;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+    .card {
+      background: var(--card-background);
+      padding: 1.6rem 2rem;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px var(--shadow-color);
+      transition: box-shadow 0.3s ease, color 0.3s ease;
+      color: var(--text-light);
+      user-select: text;
+    }
+    .card:hover {
+      box-shadow: 0 6px 25px rgba(74, 144, 226, 0.6);
+      color: var(--text-color);
+    }
+    .card p {
+      margin-bottom: 0.8rem;
       font-size: 1.05rem;
     }
+    .card strong {
+      color: var(--accent-color);
+      font-weight: 700;
+    }
 
-    .contact p {
-      margin: 10px 0;
+    /* Contact Section */
+    #contact .section-content {
+      text-align: left;
+      color: var(--text-light);
+      max-width: 900px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 0.7rem;
       font-size: 1.1rem;
-      color: #1e3a8a;
+      user-select: text;
+    }
+    #contact a {
+      font-weight: 600;
+      color: var(--accent-color);
+      word-break: break-word;
+    }
+    #contact a:hover {
+      color: #78a9ff;
     }
 
-    .contact a {
-      text-decoration: none;
-      color: #9333ea;
-    }
-
-    .contact a:hover {
-      text-decoration: underline;
-    }
-
+    /* Footer */
     footer {
-      background: linear-gradient(to right, #1e3a8a, #9333ea);
-      color: white;
+      background-color: #1b1b1b;
+      color: var(--text-light);
       text-align: center;
-      padding: 20px;
-      margin-top: 40px;
-    }
-
-    @media (max-width: 600px) {
-      header h1 {
-        font-size: 2.2rem;
-      }
-
-      h2 {
-        font-size: 1.6rem;
-      }
+      padding: 1.8rem;
+      font-size: 0.9rem;
+      box-shadow: 0 -3px 10px var(--shadow-color);
+      user-select: none;
     }
   </style>
 </head>
 <body>
-
   <header>
-    <img src="image.jpeg" alt="Hamim Amin Profile Photo">
-    <h1>Hamim</h1>
-    <p>Software Developer | Creative Coder | Java Enthusiast</p>
+    <h1>Hamim's Portfolio</h1>
+    <nav>
+      <a href="#home" class="nav-link">Home</a>
+      <a href="#about" class="nav-link">About</a>
+      <a href="#skills" class="nav-link">Skills</a>
+      <a href="#projects" class="nav-link">Projects</a>
+      <a href="#experience" class="nav-link">Experience</a>
+      <a href="#contact" class="nav-link">Contact</a>
+    </nav>
   </header>
 
-  <section class="about">
-    <h2>About Me</h2>
-    <p>
-      Hi! I'm Hamim, a 3rd-year Computer Science and Engineering student at United International University.
-      I have completed 65 credits so far with a CGPA of 3.92. I am passionate about software development and enjoy building meaningful applications, games, and educational tools.
-      I love solving real-world problems using code and have a strong interest in Java, Python, and full-stack development.
-    </p>
+  <section id="home" class="visible">
+    <h1>Hamim</h1>
+    <p id="typing-text"></p>
   </section>
 
-  <section class="projects">
-    <h2>Projects</h2>
-    <div class="project">
-      <h3>Code Hunter - 2D JavaFX Game</h3>
-      <p>A treasure-hunting educational game where players explore maps, solve programming challenges, and level up. Built with JavaFX, Scene Builder, and socket-based multiplayer.</p>
-    </div>
-    <div class="project">
-      <h3>Smart Blind Stick</h3>
-      <p>An IoT project using ESP32 cam for real time object detection and DFplayer Mini for voice moduloe, Vibration sensor for Fall detection, ESP8266, GPS Neo6M, and Blynk App to send location-based alerts to caretakers.</p>
-    </div>
-    <div class="project">
-      <h3>Commune Web App</h3>
-      <p>A social and e-commerce platform using MySQL, Node.Js , JavaScript and HTML/CSS with user profiles, memberships, chat, and product management.</p>
-    </div>
-    <div class="project">
-      <h3>Bachelor Hub</h3>
-      <p>A community platform for university students and bachelors to find roommates, housing, food sharing, and essential services. Built using HTML, CSS, JavaScript, Node.js and MySQL.</p>
-    </div>
-    <div class="project">
-      <h3>Tuition Fee Calculator</h3>
-      <p>A web-based application that calculates tuition fees dynamically based on credit hour, semester, and discounts. Designed for universities using HTML, CSS, JavaScript and responsive design.</p>
+  <section id="about" class="visible">
+    <div class="section-title">About Me</div>
+    <img src="image.jpeg" alt="Profile Picture" />
+    <div class="section-content">
+      <p>
+        Hello! I'm Hamim, a passionate Computer Science and Engineering student
+        at United International University. I'm currently in my third year and
+        have completed 80 credits with a CGPA of 3.94. I enjoy building
+        impactful software, educational games, and tools that solve real-world
+        problems. Java and full-stack development are my specialties, and I'm
+        always exploring new technologies.
+      </p>
+      <a href="Hamim_Resume.pdf" class="btn" download>Download Resume</a>
     </div>
   </section>
 
-  <section class="contact">
-    <h2>Contact</h2>
-    <p>Email: <a href="mailto:hamim2310047@bscse.uiu.ac.bd">hamim2310047@bscse.uiu.ac.bd</a></p>
-    <p>GitHub: <a href="https://github.com/hamim0047" target="_blank">github.com/hamim0047</a></p>
-    <p>LinkedIn: <a href="https://linkedin.com/in/muhammad-hamim-196466277/" target="_blank">linkedin.com/in/muhammad-hamim-196466277</a></p>
+  <section id="skills" class="visible">
+    <div class="section-title">Skills</div>
+    <div class="section-content">
+      <div class="skill">
+        <div class="skill-name">
+          <span>Java</span><span>95%</span>
+        </div>
+        <div class="skill-bar">
+          <div class="skill-level" style="width: 95%"></div>
+        </div>
+      </div>
+      <div class="skill">
+        <div class="skill-name">
+          <span>Python</span><span>85%</span>
+        </div>
+        <div class="skill-bar">
+          <div class="skill-level" style="width: 85%"></div>
+        </div>
+      </div>
+      <div class="skill">
+        <div class="skill-name">
+          <span>C</span><span>95%</span>
+        </div>
+        <div class="skill-bar">
+          <div class="skill-level" style="width: 95%"></div>
+        </div>
+      </div>
+      <div class="skill">
+        <div class="skill-name">
+          <span>C++</span><span>85%</span>
+        </div>
+        <div class="skill-bar">
+          <div class="skill-level" style="width: 85%"></div>
+        </div>
+      </div>
+      <div class="skill">
+        <div class="skill-name">
+          <span>HTML</span><span>95%</span>
+        </div>
+        <div class="skill-bar">
+          <div class="skill-level" style="width: 95%"></div>
+        </div>
+      </div>
+      <div class="skill">
+        <div class="skill-name">
+          <span>CSS</span><span>90%</span>
+        </div>
+        <div class="skill-bar">
+          <div class="skill-level" style="width: 90%"></div>
+        </div>
+      </div>
+      <div class="skill">
+        <div class="skill-name">
+          <span>JavaScript</span><span>85%</span>
+        </div>
+        <div class="skill-bar">
+          <div class="skill-level" style="width: 85%"></div>
+        </div>
+      </div>
+      <div class="skill">
+        <div class="skill-name">
+          <span>Node.js</span><span>80%</span>
+        </div>
+        <div class="skill-bar">
+          <div class="skill-level" style="width: 80%"></div>
+        </div>
+      </div>
+      <div class="skill">
+        <div class="skill-name">
+          <span>MySQL</span><span>85%</span>
+        </div>
+        <div class="skill-bar">
+          <div class="skill-level" style="width: 85%"></div>
+        </div>
+      </div>
+      <div class="skill">
+        <div class="skill-name">
+          <span>JavaFX</span><span>85%</span>
+        </div>
+        <div class="skill-bar">
+          <div class="skill-level" style="width: 85%"></div>
+        </div>
+      </div>
+    </div>
   </section>
 
-  <footer>
-    <p>&copy; 2025 Hamim. All rights reserved.</p>
-  </footer>
+  <section id="projects" class="visible">
+    <div class="section-title">Projects</div>
+    <div class="card-container">
+      <div class="card">
+        <p><strong>Code Hunter:</strong>
+           A 2D JavaFX game that combines treasure hunting and programming quizzes with multiplayer features.</p>
+      </div>
+      <div class="card">
+        <p><strong>Smart Blind Stick:</strong> 
+          IoT solution with ESP32-CAM, audio feedback, fall detection, and GPS alert system.</p>
+      </div>
+      <div class="card">
+        <p><strong>Commune Web App:</strong> 
+          Full-stack app for community engagement with chat, marketplace, and user profiles.</p>
+      </div>
+      <div class="card">
+        <p><strong>Bachelor Hub:</strong> 
+          Platform for university students to connect, share resources, and find roommates.</p>
+      </div>
+      <div class="card">
+        <p><strong>Tuition Fee Calculator:</strong> 
+          Web app to calculate tuition fees based on credit and discount logic.</p>
+      </div>
+    </div>
+  </section>
 
+  <section id="experience" class="visible">
+  <div class="section-title">Experience</div>
+  <div class="card-container">
+    <div class="card">
+      <p><strong>Senior Executive</strong> - UIU Robotics Club</p>
+    </div>
+    <div class="card">
+      <p><strong>Executive</strong> - UIU Sports Club</p>
+    </div>
+    <div class="card">
+      <p><strong>Volunteer</strong> - UIU CSE Project</p>
+    </div>
+    <div class="card">
+      <p><strong>Participant</strong> - KUET CSE Fest (SoccerBot)</p>
+    </div>
+    <div class="card">
+      <p><strong>Participant</strong> - UIU CSE Fest (SoccerBot)</p>
+    </div>
+  </div>
+</section>
+
+
+  <section id="contact" class="visible">
+    <div class="section-title">Contact</div>
+    <div class="section-content">
+      <p>Email: <a href="mailto:hamim2310047@bscse.uiu.ac.bd">hamim2310047@bscse.uiu.ac.bd</a></p>
+      <p>GitHub: <a href="https://github.com/hamim0047" target="_blank">github.com/hamim0047</a></p>
+      <p>LinkedIn: <a href="https://linkedin.com/in/muhammad-hamim-196466277/" target="_blank">linkedin.com/in/muhammad-hamim</a></p>
+    </div>
+  </section>
+
+  <footer>&copy; 2025 Muhammad Hamim. All rights reserved.</footer>
+
+  <script>
+    // Intersection Observer for fade-in on scroll
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+
+    document.querySelectorAll("section").forEach((section) => {
+      observer.observe(section);
+    });
+
+    // Scrollspy for nav highlight
+    const sections = document.querySelectorAll("section");
+    const navLinks = document.querySelectorAll("nav a");
+
+    function activateNavLink() {
+      let currentIndex = sections.length - 1;
+
+      for (let i = 0; i < sections.length; i++) {
+        const sectionTop = sections[i].getBoundingClientRect().top;
+        if (sectionTop > window.innerHeight / 3) {
+          currentIndex = i - 1;
+          break;
+        }
+      }
+      if (currentIndex < 0) currentIndex = 0;
+
+      navLinks.forEach((link) => link.classList.remove("active"));
+      if (navLinks[currentIndex]) {
+        navLinks[currentIndex].classList.add("active");
+      }
+    }
+
+    window.addEventListener("scroll", activateNavLink);
+    window.addEventListener("load", activateNavLink);
+
+    // Typing effect for home subtitle
+    const typingText = "Full-Stuck Developer | Problem Solver";
+    const typingElement = document.getElementById("typing-text");
+    let charIndex = 0;
+
+    function typeLetter() {
+      if (charIndex < typingText.length) {
+        typingElement.textContent += typingText.charAt(charIndex);
+        charIndex++;
+        setTimeout(typeLetter, 100); // typing speed: 100ms per letter
+      }
+    }
+
+    window.addEventListener("load", () => {
+      // Clear text first
+      typingElement.textContent = "";
+      charIndex = 0;
+      typeLetter();
+    });
+  </script>
 </body>
 </html>
