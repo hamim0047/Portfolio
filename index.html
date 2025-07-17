@@ -55,9 +55,13 @@
       color: var(--accent-color);
       font-weight: 700;
     }
+
+    nav {
+      display: flex;
+      gap: 1.5rem;
+    }
     nav a {
       color: var(--text-color);
-      margin-left: 1.5rem;
       text-decoration: none;
       font-weight: 500;
       padding-bottom: 2px;
@@ -73,6 +77,18 @@
       color: var(--accent-color);
       border-bottom: 2px solid var(--accent-color);
       font-weight: 700;
+    }
+
+    /* Hamburger Menu (hidden on desktop) */
+    #menu-toggle {
+      display: none;
+    }
+    #menu-label {
+      display: none;
+      font-size: 1.8rem;
+      color: var(--accent-color);
+      cursor: pointer;
+      user-select: none;
     }
 
     section {
@@ -115,7 +131,6 @@
       transform: translateY(40px);
       animation: fadeSlideIn 1s ease forwards 0.3s;
     }
-    /* Replaced the old #home p CSS with this for typing effect */
     #home p#typing-text {
       font-size: 1.8rem;
       color: var(--text-light);
@@ -127,7 +142,6 @@
       white-space: nowrap;
     }
 
-    /* Text fade and slide in */
     @keyframes fadeSlideIn {
       to {
         opacity: 1;
@@ -138,28 +152,27 @@
     #about {
       text-align: center;
     }
-    /* Profile Picture with professional double border frame */
     #about img {
-  width: 260px;
-  height: 260px;
-  object-fit: cover;
-  border-radius: 50%;
-  margin-bottom: 1.5rem;
-  border: 6px solid var(--accent-color);
-  box-shadow:
-    0 0 20px rgba(74, 144, 226, 0.7),
-    0 0 0 8px var(--card-background),
-    0 4px 20px rgba(0, 0, 0, 0.5);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  user-select: none;
-}
-#about img:hover {
-  transform: scale(1.07);
-  box-shadow:
-    0 0 25px rgba(74, 144, 226, 0.9),
-    0 0 0 8px var(--card-background),
-    0 8px 28px rgba(0, 0, 0, 0.6);
-}
+      width: 260px;
+      height: 260px;
+      object-fit: cover;
+      border-radius: 50%;
+      margin-bottom: 1.5rem;
+      border: 6px solid var(--accent-color);
+      box-shadow:
+        0 0 20px rgba(74, 144, 226, 0.7),
+        0 0 0 8px var(--card-background),
+        0 4px 20px rgba(0, 0, 0, 0.5);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      user-select: none;
+    }
+    #about img:hover {
+      transform: scale(1.07);
+      box-shadow:
+        0 0 25px rgba(74, 144, 226, 0.9),
+        0 0 0 8px var(--card-background),
+        0 8px 28px rgba(0, 0, 0, 0.6);
+    }
 
     .section-title {
       font-size: 2.4rem;
@@ -206,20 +219,6 @@
       background: #78a9ff;
       box-shadow: 0 5px 12px rgba(120, 169, 255, 0.7);
       color: #121212;
-    }
-
-    /* Responsive home */
-    @media (max-width: 600px) {
-      #home h1 {
-        font-size: 3rem;
-      }
-      #home p#typing-text {
-        font-size: 1.3rem;
-      }
-      #about img {
-        width: 150px;
-        height: 150px;
-      }
     }
 
     /* Skills */
@@ -314,11 +313,94 @@
       box-shadow: 0 -3px 10px var(--shadow-color);
       user-select: none;
     }
+
+    /* Responsive Styles */
+
+    @media (max-width: 900px) {
+      section {
+        margin: 6rem 1.5rem 3rem;
+        padding: 2.5rem 1.5rem 3rem;
+      }
+    }
+
+    @media (max-width: 600px) {
+      header {
+        padding: 1rem 1rem;
+      }
+      header h1 {
+        font-size: 1.5rem;
+      }
+
+      /* Show hamburger menu */
+      #menu-label {
+        display: block;
+      }
+      nav {
+        position: fixed;
+        top: 60px;
+        right: 0;
+        background-color: var(--card-background);
+        flex-direction: column;
+        width: 220px;
+        max-width: 80vw;
+        height: calc(100vh - 60px);
+        padding: 1rem 1.5rem;
+        transform: translateX(100%);
+        transition: transform 0.3s ease;
+        box-shadow: -3px 0 8px rgba(0, 0, 0, 0.7);
+        border-radius: 0 0 0 12px;
+        user-select: none;
+      }
+      nav a {
+        margin: 0 0 1.5rem 0;
+        font-size: 1.15rem;
+        padding-bottom: 0;
+      }
+      nav a.active {
+        border-bottom: none;
+        font-weight: 700;
+        color: var(--accent-color);
+      }
+
+      #menu-toggle:checked + nav {
+        transform: translateX(0);
+      }
+
+      /* Hide nav links by default on mobile */
+      nav a:hover {
+        color: var(--pr-color);
+        border-bottom: none;
+      }
+
+      /* Fix body scroll when menu open */
+      body.menu-open {
+        overflow: hidden;
+      }
+
+      /* Adjust section margins for mobile */
+      section {
+        margin: 5rem 1rem 3rem;
+        padding: 2rem 1rem 2rem;
+      }
+
+      #home h1 {
+        font-size: 3rem;
+      }
+      #home p#typing-text {
+        font-size: 1.3rem;
+      }
+      #about img {
+        width: 150px;
+        height: 150px;
+      }
+    }
   </style>
 </head>
 <body>
   <header>
     <h1>Hamim's Portfolio</h1>
+    <input type="checkbox" id="menu-toggle" />
+    <label for="menu-toggle" id="menu-label">&#9776;</label>
     <nav>
       <a href="#home" class="nav-link">Home</a>
       <a href="#about" class="nav-link">About</a>
@@ -483,7 +565,6 @@
   </div>
 </section>
 
-
   <section id="contact" class="visible">
     <div class="section-title">Contact</div>
     <div class="section-content">
@@ -555,6 +636,16 @@
       typingElement.textContent = "";
       charIndex = 0;
       typeLetter();
+    });
+
+    // Disable body scroll when mobile menu is open
+    const menuToggle = document.getElementById("menu-toggle");
+    menuToggle.addEventListener("change", () => {
+      if (menuToggle.checked) {
+        document.body.classList.add("menu-open");
+      } else {
+        document.body.classList.remove("menu-open");
+      }
     });
   </script>
 </body>
