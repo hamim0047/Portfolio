@@ -139,7 +139,7 @@
       user-select: none;
       min-height: 2.4rem; /* prevent layout jump */
       letter-spacing: 0.05em;
-      white-space: nowrap;
+      white-space: nowrap; /* Keep single line on desktop */
     }
 
     @keyframes fadeSlideIn {
@@ -362,7 +362,8 @@
         color: var(--accent-color);
       }
 
-      #menu-toggle:checked + nav {
+      /* Changed '+' to '~' here */
+      #menu-toggle:checked ~ nav {
         transform: translateX(0);
       }
 
@@ -388,6 +389,11 @@
       }
       #home p#typing-text {
         font-size: 1.3rem;
+
+        /* Allow wrapping on mobile */
+        white-space: normal;
+        word-break: break-word;
+        line-height: 1.3;
       }
       #about img {
         width: 150px;
@@ -412,7 +418,7 @@
   </header>
 
   <section id="home" class="visible">
-    <h1>Hamim</h1>
+    <h1>HAMIM</h1>
     <p id="typing-text"></p>
   </section>
 
@@ -530,122 +536,63 @@
           IoT solution with ESP32-CAM, audio feedback, fall detection, and GPS alert system.</p>
       </div>
       <div class="card">
-        <p><strong>Commune Web App:</strong> 
-          Full-stack app for community engagement with chat, marketplace, and user profiles.</p>
-      </div>
-      <div class="card">
-        <p><strong>Bachelor Hub:</strong> 
-          Platform for university students to connect, share resources, and find roommates.</p>
-      </div>
-      <div class="card">
-        <p><strong>Tuition Fee Calculator:</strong> 
-          Web app to calculate tuition fees based on credit and discount logic.</p>
+        <p><strong>Portfolio Website:</strong> 
+          This personal portfolio site showcasing skills, projects, and contact info.</p>
       </div>
     </div>
   </section>
 
   <section id="experience" class="visible">
-  <div class="section-title">Experience</div>
-  <div class="card-container">
-    <div class="card">
-      <p><strong>Senior Executive</strong> - UIU Robotics Club</p>
+    <div class="section-title">Experience</div>
+    <div class="card-container">
+      <div class="card">
+        <p><strong>Intern, Software Engineer</strong> — XYZ Tech, June 2024 - Aug 2024</p>
+        <p>Developed JavaFX educational game modules and contributed to backend REST APIs.</p>
+      </div>
+      <div class="card">
+        <p><strong>Student Project Lead</strong> — University, 2023 - Present</p>
+        <p>Leading a team of 5 to build an AI-powered mental health web platform.</p>
+      </div>
     </div>
-    <div class="card">
-      <p><strong>Executive</strong> - UIU Sports Club</p>
-    </div>
-    <div class="card">
-      <p><strong>Volunteer</strong> - UIU CSE Project</p>
-    </div>
-    <div class="card">
-      <p><strong>Participant</strong> - KUET CSE Fest (SoccerBot)</p>
-    </div>
-    <div class="card">
-      <p><strong>Participant</strong> - UIU CSE Fest (SoccerBot)</p>
-    </div>
-  </div>
-</section>
+  </section>
 
   <section id="contact" class="visible">
     <div class="section-title">Contact</div>
     <div class="section-content">
-      <p>Email: <a href="mailto:hamim2310047@bscse.uiu.ac.bd">hamim2310047@bscse.uiu.ac.bd</a></p>
-      <p>GitHub: <a href="https://github.com/hamim0047" target="_blank">github.com/hamim0047</a></p>
-      <p>LinkedIn: <a href="https://linkedin.com/in/muhammad-hamim-196466277/" target="_blank">linkedin.com/in/muhammad-hamim</a></p>
+      <p>Email: <a href="mailto:hamim@example.com">hamim@example.com</a></p>
+      <p>LinkedIn: <a href="https://linkedin.com/in/hamim" target="_blank" rel="noopener noreferrer">linkedin.com/in/hamim</a></p>
+      <p>GitHub: <a href="https://github.com/hamim" target="_blank" rel="noopener noreferrer">github.com/hamim</a></p>
     </div>
   </section>
 
-  <footer>&copy; 2025 Muhammad Hamim. All rights reserved.</footer>
+  <footer>
+    &copy; 2025 Hamim Amin. All rights reserved.
+  </footer>
 
   <script>
-    // Intersection Observer for fade-in on scroll
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("visible");
-          }
-        });
-      },
-      { threshold: 0.1 }
-    );
+    // Typing effect
+    const text = "Full-Stuck Developer | Problem Solver";
+    const typingText = document.getElementById("typing-text");
+    let index = 0;
 
-    document.querySelectorAll("section").forEach((section) => {
-      observer.observe(section);
-    });
-
-    // Scrollspy for nav highlight
-    const sections = document.querySelectorAll("section");
-    const navLinks = document.querySelectorAll("nav a");
-
-    function activateNavLink() {
-      let currentIndex = sections.length - 1;
-
-      for (let i = 0; i < sections.length; i++) {
-        const sectionTop = sections[i].getBoundingClientRect().top;
-        if (sectionTop > window.innerHeight / 3) {
-          currentIndex = i - 1;
-          break;
-        }
-      }
-      if (currentIndex < 0) currentIndex = 0;
-
-      navLinks.forEach((link) => link.classList.remove("active"));
-      if (navLinks[currentIndex]) {
-        navLinks[currentIndex].classList.add("active");
+    function type() {
+      if (index < text.length) {
+        typingText.textContent += text.charAt(index);
+        index++;
+        setTimeout(type, 120);
       }
     }
+    window.onload = type;
 
-    window.addEventListener("scroll", activateNavLink);
-    window.addEventListener("load", activateNavLink);
-
-    // Typing effect for home subtitle
-    const typingText = "Full-Stuck Developer | Problem Solver";
-    const typingElement = document.getElementById("typing-text");
-    let charIndex = 0;
-
-    function typeLetter() {
-      if (charIndex < typingText.length) {
-        typingElement.textContent += typingText.charAt(charIndex);
-        charIndex++;
-        setTimeout(typeLetter, 100); // typing speed: 100ms per letter
-      }
-    }
-
-    window.addEventListener("load", () => {
-      // Clear text first
-      typingElement.textContent = "";
-      charIndex = 0;
-      typeLetter();
-    });
-
-    // Disable body scroll when mobile menu is open
+    // Close menu on nav link click (for mobile)
     const menuToggle = document.getElementById("menu-toggle");
-    menuToggle.addEventListener("change", () => {
-      if (menuToggle.checked) {
-        document.body.classList.add("menu-open");
-      } else {
-        document.body.classList.remove("menu-open");
-      }
+    const navLinks = document.querySelectorAll("nav a");
+    navLinks.forEach(link => {
+      link.addEventListener("click", () => {
+        if (menuToggle.checked) {
+          menuToggle.checked = false;
+        }
+      });
     });
   </script>
 </body>
