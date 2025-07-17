@@ -46,7 +46,7 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      z-index: 1000;
+      z-index: 1100;
       box-shadow: 0 2px 8px var(--shadow-color);
       user-select: none;
     }
@@ -54,10 +54,15 @@
       font-size: 1.8rem;
       color: var(--accent-color);
       font-weight: 700;
+      user-select: text;
     }
     nav {
       display: flex;
-      gap: 0;
+      align-items: center;
+      gap: 1rem;
+      transition: max-height 0.3s ease;
+      max-height: none;
+      overflow: visible;
     }
     nav a {
       color: var(--text-color);
@@ -80,68 +85,32 @@
       font-weight: 700;
     }
 
-    /* Hamburger button styles */
+    /* Hamburger styles */
     .hamburger {
       display: none;
       flex-direction: column;
-      justify-content: space-around;
-      width: 25px;
+      justify-content: space-between;
+      width: 28px;
       height: 22px;
       cursor: pointer;
       user-select: none;
+      z-index: 1200;
     }
     .hamburger div {
-      width: 100%;
-      height: 3px;
-      background-color: var(--accent-color);
-      border-radius: 2px;
+      height: 3.5px;
+      background: var(--accent-color);
+      border-radius: 4px;
       transition: all 0.3s ease;
     }
-    /* Animate hamburger to X when active */
     .hamburger.active div:nth-child(1) {
-      transform: rotate(45deg) translate(5px, 5px);
+      transform: translateY(9px) rotate(45deg);
     }
     .hamburger.active div:nth-child(2) {
       opacity: 0;
     }
     .hamburger.active div:nth-child(3) {
-      transform: rotate(-45deg) translate(5px, -5px);
+      transform: translateY(-9px) rotate(-45deg);
     }
-
-    /* Mobile styles */
-    @media (max-width: 768px) {
-      nav {
-        position: fixed;
-        top: 60px;
-        left: 0;
-        right: 0;
-        background-color: #1b1b1b;
-        flex-direction: column;
-        overflow: hidden;
-        max-height: 0;
-        transition: max-height 0.3s ease;
-        box-shadow: 0 4px 15px var(--shadow-color);
-        border-radius: 0 0 12px 12px;
-      }
-      nav.open {
-        max-height: 300px; /* enough for all links */
-      }
-      nav a {
-        margin: 1rem 2rem;
-        font-size: 1.2rem;
-        border-bottom: none !important;
-      }
-      nav a.active,
-      nav a:hover {
-        border-bottom: none !important;
-        color: var(--accent-color);
-      }
-      .hamburger {
-        display: flex;
-      }
-    }
-
-    /* Rest of your existing CSS... */
 
     section {
       min-height: 100vh;
@@ -163,7 +132,6 @@
       transform: translateY(0);
     }
 
-    /* Home section */
     #home {
       background: transparent;
       text-align: center;
@@ -183,7 +151,9 @@
       opacity: 0;
       transform: translateY(40px);
       animation: fadeSlideIn 1s ease forwards 0.3s;
+      user-select: text;
     }
+    /* Typing effect text */
     #home p#typing-text {
       font-size: 1.8rem;
       color: var(--text-light);
@@ -193,8 +163,14 @@
       min-height: 2.4rem; /* prevent layout jump */
       letter-spacing: 0.05em;
       white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 100%;
+      margin-left: auto;
+      margin-right: auto;
     }
 
+    /* Text fade and slide in */
     @keyframes fadeSlideIn {
       to {
         opacity: 1;
@@ -205,6 +181,7 @@
     #about {
       text-align: center;
     }
+    /* Profile Picture with professional double border frame */
     #about img {
       width: 260px;
       height: 260px;
@@ -272,6 +249,34 @@
       background: #78a9ff;
       box-shadow: 0 5px 12px rgba(120, 169, 255, 0.7);
       color: #121212;
+    }
+
+    /* Responsive home */
+    @media (max-width: 600px) {
+      #home h1 {
+        font-size: 3rem;
+      }
+      #home p#typing-text {
+        font-size: 1.3rem;
+      }
+      #about img {
+        width: 150px;
+        height: 150px;
+      }
+    }
+
+    /* Smaller devices - typing text wrap & resize */
+    @media (max-width: 480px) {
+      #home p#typing-text {
+        font-size: 1rem;
+        white-space: normal;
+        overflow: visible;
+        text-overflow: clip;
+        line-height: 1.2;
+        max-width: 260px;
+        margin-left: auto;
+        margin-right: auto;
+      }
     }
 
     /* Skills */
@@ -367,32 +372,51 @@
       user-select: none;
     }
 
-    /* Responsive home */
-    @media (max-width: 600px) {
-      #home h1 {
-        font-size: 3rem;
+    /* MOBILE MENU - Hamburger and sliding right side nav */
+
+    @media (max-width: 768px) {
+      nav {
+        position: fixed;
+        top: 60px;
+        right: 0;
+        width: 250px;
+        height: calc(100% - 60px);
+        background-color: #1b1b1b;
+        flex-direction: column;
+        padding-top: 1.5rem;
+        box-shadow: -4px 0 15px var(--shadow-color);
+        border-radius: 12px 0 0 12px;
+        transform: translateX(100%);
+        transition: transform 0.3s ease;
+        max-height: none;
+        overflow-y: auto;
+        z-index: 1050;
       }
-      #home p#typing-text {
-        font-size: 1.3rem;
+      nav.open {
+        transform: translateX(0);
       }
-      #about img {
-        width: 150px;
-        height: 150px;
+      nav a {
+        margin: 1rem 1.5rem;
+        font-size: 1.2rem;
+        border-bottom: none !important;
+        white-space: normal;
+      }
+      nav a.active,
+      nav a:hover {
+        border-bottom: none !important;
+        color: var(--accent-color);
+      }
+      .hamburger {
+        display: flex;
+        order: 2; /* push hamburger to right */
       }
     }
+
   </style>
 </head>
 <body>
   <header>
     <h1>Hamim's Portfolio</h1>
-
-    <!-- Hamburger button for mobile -->
-    <div class="hamburger" id="hamburger" aria-label="Toggle navigation" role="button" tabindex="0">
-      <div></div>
-      <div></div>
-      <div></div>
-    </div>
-
     <nav id="nav-menu">
       <a href="#home" class="nav-link">Home</a>
       <a href="#about" class="nav-link">About</a>
@@ -401,10 +425,15 @@
       <a href="#experience" class="nav-link">Experience</a>
       <a href="#contact" class="nav-link">Contact</a>
     </nav>
+    <div id="hamburger" class="hamburger" tabindex="0" aria-label="Toggle navigation menu" role="button">
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
   </header>
 
   <section id="home" class="visible">
-    <h1>Hamim</h1>
+    <h1>HAMIM</h1>
     <p id="typing-text"></p>
   </section>
 
@@ -427,7 +456,6 @@
   <section id="skills" class="visible">
     <div class="section-title">Skills</div>
     <div class="section-content">
-      <!-- Skills here -->
       <div class="skill">
         <div class="skill-name">
           <span>Java</span><span>95%</span>
@@ -436,7 +464,6 @@
           <div class="skill-level" style="width: 95%"></div>
         </div>
       </div>
-      <!-- Repeat for other skills -->
       <div class="skill">
         <div class="skill-name">
           <span>Python</span><span>85%</span>
@@ -535,6 +562,10 @@
         <p><strong>Tuition Fee Calculator:</strong> 
           Web app to calculate tuition fees based on credit and discount logic.</p>
       </div>
+      <div class="card">
+        <p><strong>SoccerBot:</strong>
+          Competitive robot built for soccer games</p>
+      </div>
     </div>
   </section>
 
@@ -542,19 +573,19 @@
     <div class="section-title">Experience</div>
     <div class="card-container">
       <div class="card">
-        <p><strong>Senior Executive</strong> - UIU Robotics Club</p>
+        <h3>Senior Executive - UIU Robotics Club</h3>
       </div>
       <div class="card">
-        <p><strong>Executive</strong> - UIU Sports Club</p>
+        <h3>Executive - UIU Sports Club</h3>
       </div>
       <div class="card">
-        <p><strong>Volunteer</strong> - UIU CSE Project</p>
+        <h3>Volunteer - UIU CSE Project Show</h3>
       </div>
       <div class="card">
-        <p><strong>Participant</strong> - KUET CSE Fest (SoccerBot)</p>
+        <h3>Participant - KUET CSE Fest (SoccerBot)</h3>
       </div>
       <div class="card">
-        <p><strong>Participant</strong> - UIU CSE Fest (SoccerBot)</p>
+        <h3>Participant - UIU CSE Fest (SoccerBot)</h3>
       </div>
     </div>
   </section>
@@ -568,86 +599,59 @@
     </div>
   </section>
 
-  <footer>&copy; 2025 Muhammad Hamim. All rights reserved.</footer>
+  <footer>
+    &copy; 2025 Hamim All rights reserved.
+  </footer>
 
   <script>
-    // Intersection Observer for fade-in on scroll
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("visible");
-          }
-        });
-      },
-      { threshold: 0.1 }
-    );
-
-    document.querySelectorAll("section").forEach((section) => {
-      observer.observe(section);
-    });
-
-    // Scrollspy for nav highlight
-    const sections = document.querySelectorAll("section");
-    const navLinks = document.querySelectorAll("nav a");
-
-    function activateNavLink() {
-      let currentIndex = sections.length - 1;
-
-      for (let i = 0; i < sections.length; i++) {
-        const sectionTop = sections[i].getBoundingClientRect().top;
-        if (sectionTop > window.innerHeight / 3) {
-          currentIndex = i - 1;
-          break;
-        }
-      }
-      if (currentIndex < 0) currentIndex = 0;
-
-      navLinks.forEach((link) => link.classList.remove("active"));
-      if (navLinks[currentIndex]) {
-        navLinks[currentIndex].classList.add("active");
-      }
-    }
-
-    window.addEventListener("scroll", activateNavLink);
-    window.addEventListener("load", activateNavLink);
-
-    // Typing effect for home subtitle
+    // Typing animation for #typing-text
     const typingText = "Full-Stuck Developer | Problem Solver";
     const typingElement = document.getElementById("typing-text");
-    let charIndex = 0;
 
-    function typeLetter() {
-      if (charIndex < typingText.length) {
-        typingElement.textContent += typingText.charAt(charIndex);
-        charIndex++;
-        setTimeout(typeLetter, 100); // typing speed: 100ms per letter
+    let index = 0;
+    function type() {
+      if (index <= typingText.length) {
+        typingElement.textContent = typingText.slice(0, index);
+        index++;
+        setTimeout(type, 100);
       }
     }
-
-    window.addEventListener("load", () => {
-      // Clear text first
-      typingElement.textContent = "";
-      charIndex = 0;
-      typeLetter();
-    });
+    type();
 
     // Hamburger toggle
     const hamburger = document.getElementById("hamburger");
     const navMenu = document.getElementById("nav-menu");
+    const navLinks = document.querySelectorAll("nav a");
 
     hamburger.addEventListener("click", () => {
       hamburger.classList.toggle("active");
       navMenu.classList.toggle("open");
     });
 
-    // Also support keyboard toggling for accessibility
-    hamburger.addEventListener("keydown", (e) => {
-      if (e.key === "Enter" || e.key === " ") {
-        e.preventDefault();
-        hamburger.classList.toggle("active");
-        navMenu.classList.toggle("open");
-      }
+    // Close menu on link click (mobile)
+    navLinks.forEach((link) => {
+      link.addEventListener("click", () => {
+        if (navMenu.classList.contains("open")) {
+          navMenu.classList.remove("open");
+          hamburger.classList.remove("active");
+        }
+      });
+    });
+
+    // Highlight active nav link on scroll
+    window.addEventListener("scroll", () => {
+      const scrollY = window.pageYOffset;
+      navLinks.forEach((link) => {
+        const section = document.querySelector(link.hash);
+        if (
+          section.offsetTop <= scrollY + 70 &&
+          section.offsetTop + section.offsetHeight > scrollY + 70
+        ) {
+          link.classList.add("active");
+        } else {
+          link.classList.remove("active");
+        }
+      });
     });
   </script>
 </body>
