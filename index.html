@@ -4,10 +4,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Hamim's Portfolio</title>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap"
-    rel="stylesheet"
-  />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
   <style>
     /* Dark Professional Palette */
     :root {
@@ -279,6 +277,13 @@
       }
     }
 
+    section#skills i {
+  color: white;
+}
+i {
+  color: rgba(190, 214, 255, 0.859) !important;
+}
+
     /* Skills */
     .skill {
       margin-bottom: 1.4rem;
@@ -438,7 +443,7 @@
   </section>
 
   <section id="about" class="visible">
-    <div class="section-title">About Me</div>
+    <div class="section-title"><i class="fas fa-user"></i> About Me</div>
     <img src="image.jpeg" alt="Profile Picture" />
     <div class="section-content">
       <p>
@@ -454,123 +459,108 @@
   </section>
 
   <section id="skills" class="visible">
-    <div class="section-title">Skills</div>
-    <div class="section-content">
-      <div class="skill">
-        <div class="skill-name">
-          <span>Java</span><span>95%</span>
-        </div>
-        <div class="skill-bar">
-          <div class="skill-level" style="width: 95%"></div>
-        </div>
+  <div class="section-title"><i class="fas fa-tools"></i> Skills</div>
+  <div class="section-content">
+    <div class="skill">
+      <div class="skill-name">
+        <span><i class="fa-brands fa-java"></i> Java</span><span>95%</span>
       </div>
-      <div class="skill">
-        <div class="skill-name">
-          <span>Python</span><span>85%</span>
-        </div>
-        <div class="skill-bar">
-          <div class="skill-level" style="width: 85%"></div>
-        </div>
-      </div>
-      <div class="skill">
-        <div class="skill-name">
-          <span>C</span><span>95%</span>
-        </div>
-        <div class="skill-bar">
-          <div class="skill-level" style="width: 95%"></div>
-        </div>
-      </div>
-      <div class="skill">
-        <div class="skill-name">
-          <span>C++</span><span>85%</span>
-        </div>
-        <div class="skill-bar">
-          <div class="skill-level" style="width: 85%"></div>
-        </div>
-      </div>
-      <div class="skill">
-        <div class="skill-name">
-          <span>HTML</span><span>95%</span>
-        </div>
-        <div class="skill-bar">
-          <div class="skill-level" style="width: 95%"></div>
-        </div>
-      </div>
-      <div class="skill">
-        <div class="skill-name">
-          <span>CSS</span><span>90%</span>
-        </div>
-        <div class="skill-bar">
-          <div class="skill-level" style="width: 90%"></div>
-        </div>
-      </div>
-      <div class="skill">
-        <div class="skill-name">
-          <span>JavaScript</span><span>85%</span>
-        </div>
-        <div class="skill-bar">
-          <div class="skill-level" style="width: 85%"></div>
-        </div>
-      </div>
-      <div class="skill">
-        <div class="skill-name">
-          <span>Node.js</span><span>80%</span>
-        </div>
-        <div class="skill-bar">
-          <div class="skill-level" style="width: 80%"></div>
-        </div>
-      </div>
-      <div class="skill">
-        <div class="skill-name">
-          <span>MySQL</span><span>85%</span>
-        </div>
-        <div class="skill-bar">
-          <div class="skill-level" style="width: 85%"></div>
-        </div>
-      </div>
-      <div class="skill">
-        <div class="skill-name">
-          <span>JavaFX</span><span>85%</span>
-        </div>
-        <div class="skill-bar">
-          <div class="skill-level" style="width: 85%"></div>
-        </div>
-      </div>
+      <div class="skill-bar"><div class="skill-level" style="width: 95%"></div></div>
     </div>
-  </section>
+
+    <div class="skill">
+      <div class="skill-name">
+        <span><i class="fa-brands fa-python"></i> Python</span><span>85%</span>
+      </div>
+      <div class="skill-bar"><div class="skill-level" style="width: 85%"></div></div>
+    </div>
+
+    <div class="skill">
+      <div class="skill-name">
+        <span><i class="fas fa-code"></i> C</span><span>95%</span>
+      </div>
+      <div class="skill-bar"><div class="skill-level" style="width: 95%"></div></div>
+    </div>
+
+    <div class="skill">
+      <div class="skill-name">
+        <span><i class="fas fa-laptop-code"></i> C++</span><span>85%</span>
+      </div>
+      <div class="skill-bar"><div class="skill-level" style="width: 85%"></div></div>
+    </div>
+
+    <div class="skill">
+      <div class="skill-name">
+        <span><i class="fa-brands fa-html5"></i> HTML</span><span>95%</span>
+      </div>
+      <div class="skill-bar"><div class="skill-level" style="width: 95%"></div></div>
+    </div>
+
+    <div class="skill">
+      <div class="skill-name">
+        <span><i class="fa-brands fa-css3-alt"></i> CSS</span><span>90%</span>
+      </div>
+      <div class="skill-bar"><div class="skill-level" style="width: 90%"></div></div>
+    </div>
+
+    <div class="skill">
+      <div class="skill-name">
+        <span><i class="fa-brands fa-js"></i> JavaScript</span><span>85%</span>
+      </div>
+      <div class="skill-bar"><div class="skill-level" style="width: 85%"></div></div>
+    </div>
+
+    <div class="skill">
+      <div class="skill-name">
+        <span><i class="fa-brands fa-node-js"></i> Node.js</span><span>80%</span>
+      </div>
+      <div class="skill-bar"><div class="skill-level" style="width: 80%"></div></div>
+    </div>
+
+    <div class="skill">
+      <div class="skill-name">
+        <span><i class="fas fa-database"></i> MySQL</span><span>85%</span>
+      </div>
+      <div class="skill-bar"><div class="skill-level" style="width: 85%"></div></div>
+    </div>
+
+    <div class="skill">
+      <div class="skill-name">
+        <span><i class="fas fa-desktop"></i> JavaFX</span><span>85%</span>
+      </div>
+      <div class="skill-bar"><div class="skill-level" style="width: 85%"></div></div>
+    </div>
+  </div>
+</section>
+
 
   <section id="projects" class="visible">
-    <div class="section-title">Projects</div>
-    <div class="card-container">
-      <div class="card">
-        <p><strong>Code Hunter:</strong>
-           A 2D JavaFX game that combines treasure hunting and programming quizzes with multiplayer features.</p>
-      </div>
-      <div class="card">
-        <p><strong>Smart Blind Stick:</strong> 
-          IoT solution with ESP32-CAM, audio feedback, fall detection, and GPS alert system.</p>
-      </div>
-      <div class="card">
-        <p><strong>Commune Web App:</strong> 
-          Full-stack app for community engagement with chat, marketplace, and user profiles.</p>
-      </div>
-      <div class="card">
-        <p><strong>Bachelor Hub:</strong> 
-          Platform for university students to connect, share resources, and find roommates.</p>
-      </div>
-      <div class="card">
-        <p><strong>Tuition Fee Calculator:</strong> 
-          Web app to calculate tuition fees based on credit and discount logic.</p>
-      </div>
-      <div class="card">
-        <p><strong>SoccerBot:</strong>
-          Competitive robot built for soccer games</p>
-      </div>
-    </div>
-  </section>
+  <div class="section-title"><i class="fas fa-code"></i> Projects</div>
+  <div class="card-container">
+    <a href="https://github.com/hamim0047/CodeHunter" target="_blank" rel="noopener noreferrer" class="card" style="color: inherit; text-decoration: none;">
+      <p><strong>Code Hunter:</strong> A 2D JavaFX game that combines treasure hunting and programming quizzes with multiplayer features.</p>
+    </a>
+    <a href="https://github.com/hamim0047/SMART-VISION-STICK" target="_blank" rel="noopener noreferrer" class="card" style="color: inherit; text-decoration: none;">
+      <p><strong>Smart Blind Stick:</strong> IoT solution with ESP32-CAM, audio feedback, fall detection, and GPS alert system.</p>
+    </a>
+    <a href="https://github.com/hamim0047/Commune" target="_blank" rel="noopener noreferrer" class="card" style="color: inherit; text-decoration: none;">
+      <p><strong>Commune Web App:</strong> Full-stack app for community engagement with chat, marketplace, and user profiles.</p>
+    </a>
+    <a href="https://github.com/hamim0047/Bachelor-Hub" target="_blank" rel="noopener noreferrer" class="card" style="color: inherit; text-decoration: none;">
+      <p><strong>Bachelor Hub:</strong> Platform for university students to connect, share resources, and find roommates.</p>
+    </a>
+    <a href="https://github.com/hamim0047/TuitionFees_Calculator" target="_blank" rel="noopener noreferrer" class="card" style="color: inherit; text-decoration: none;">
+      <p><strong>Tuition Fee Calculator:</strong> Web app to calculate tuition fees based on credit and discount logic.</p>
+    </a>
+    <a href="https://github.com/hamim0047/SoccerBot" target="_blank" rel="noopener noreferrer" class="card" style="color: inherit; text-decoration: none;">
+      <p><strong>SoccerBot:</strong> Competitive robot built for soccer games</p>
+    </a>
+  </div>
+</section>
+
 
   <section id="experience" class="visible">
-    <div class="section-title">Experience</div>
+    <div class="section-title"><i class="fas fa-briefcase"></i> Experience</div>
     <div class="card-container">
       <div class="card">
         <h3>Senior Executive - UIU Robotics Club</h3>
@@ -591,13 +581,23 @@
   </section>
 
   <section id="contact" class="visible">
-    <div class="section-title">Contact</div>
-    <div class="section-content">
-      <p>Email: <a href="mailto:hamim2310047@bscse.uiu.ac.bd">hamim2310047@bscse.uiu.ac.bd</a></p>
-      <p>GitHub: <a href="https://github.com/hamim0047" target="_blank">github.com/hamim0047</a></p>
-      <p>LinkedIn: <a href="https://linkedin.com/in/muhammad-hamim-196466277/" target="_blank">linkedin.com/in/muhammad-hamim</a></p>
-    </div>
-  </section>
+  <div class="section-title"><i class="fas fa-envelope"></i> Contact</div>
+  <div class="section-content">
+    <p>
+      <i class="fas fa-envelope"></i>
+      Email: <a href="mailto:hamim2310047@bscse.uiu.ac.bd">hamim2310047@bscse.uiu.ac.bd</a>
+    </p>
+    <p>
+      <i class="fab fa-github"></i>
+      GitHub: <a href="https://github.com/hamim0047" target="_blank">github.com/hamim0047</a>
+    </p>
+    <p>
+      <i class="fab fa-linkedin"></i>
+      LinkedIn: <a href="https://linkedin.com/in/muhammad-hamim-196466277/" target="_blank">linkedin.com/in/muhammad-hamim</a>
+    </p>
+  </div>
+</section>
+
 
   <footer>
     &copy; 2025 Hamim All rights reserved.
