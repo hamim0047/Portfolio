@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -7,14 +8,19 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
 
   <style>
-    /* Dark Professional Palette */
+    /* === Dark Professional Palette (unchanged theme) === */
     :root {
-      --accent-color: #3491f4; /* Steel blue */
+      --accent-color: #3491f4;
+      /* Steel blue */
       --pr-color: #79b8fa;
-      --background-color: #121212; /* Very dark */
-      --card-background: #1f1f1f; /* Slightly lighter dark */
-      --text-color: #e0e0e0; /* Light gray */
-      --text-light: #a0a0a0; /* Medium gray */
+      --background-color: #121212;
+      /* Very dark */
+      --card-background: #1f1f1f;
+      /* Slightly lighter dark */
+      --text-color: #e0e0e0;
+      /* Light gray */
+      --text-light: #a0a0a0;
+      /* Medium gray */
       --shadow-color: rgba(74, 144, 226, 0.25);
     }
 
@@ -24,17 +30,20 @@
       box-sizing: border-box;
       font-family: "Montserrat", sans-serif;
       scroll-behavior: smooth;
-      user-select: text;
     }
+
     html {
       scroll-padding-top: 80px;
     }
+
     body {
       background-color: var(--background-color);
       color: var(--text-color);
       line-height: 1.6;
       min-height: 100vh;
     }
+
+    /* === Header & Nav === */
     header {
       position: fixed;
       top: 0;
@@ -46,44 +55,59 @@
       align-items: center;
       z-index: 1100;
       box-shadow: 0 2px 8px var(--shadow-color);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: .6rem;
       user-select: none;
     }
-    header h1 {
-      font-size: 1.8rem;
-      color: var(--accent-color);
-      font-weight: 700;
-      user-select: text;
+
+    .brand-badge {
+      display: grid;
+      place-items: center;
+      width: 34px;
+      height: 34px;
+      border-radius: 8px;
+      background: var(--accent-color);
+      color: #121212;
+      font-weight: 900;
     }
+
+    .brand span {
+      font-weight: 800;
+      color: var(--accent-color);
+      letter-spacing: .5px;
+    }
+
     nav {
       display: flex;
       align-items: center;
       gap: 1rem;
-      transition: max-height 0.3s ease;
+      transition: max-height .3s ease;
       max-height: none;
       overflow: visible;
     }
+
     nav a {
       color: var(--text-color);
-      margin-left: 1.5rem;
+      margin-left: 1.2rem;
       text-decoration: none;
       font-weight: 500;
       padding-bottom: 2px;
-      transition: color 0.3s ease, border-bottom 0.3s ease;
-      user-select: none;
-      position: relative;
+      transition: color .3s ease, border-bottom .3s ease;
       white-space: nowrap;
     }
-    nav a:hover {
-      color: var(--accent-color);
-      border-bottom: 2px solid var(--accent-color);
-    }
+
+    nav a:hover,
     nav a.active {
       color: var(--accent-color);
       border-bottom: 2px solid var(--accent-color);
       font-weight: 700;
     }
 
-    /* Hamburger styles */
+    /* Hamburger */
     .hamburger {
       display: none;
       flex-direction: column;
@@ -91,337 +115,373 @@
       width: 28px;
       height: 22px;
       cursor: pointer;
-      user-select: none;
       z-index: 1200;
     }
+
     .hamburger div {
       height: 3.5px;
       background: var(--accent-color);
       border-radius: 4px;
-      transition: all 0.3s ease;
+      transition: all .3s ease;
     }
+
     .hamburger.active div:nth-child(1) {
       transform: translateY(9px) rotate(45deg);
     }
+
     .hamburger.active div:nth-child(2) {
       opacity: 0;
     }
+
     .hamburger.active div:nth-child(3) {
       transform: translateY(-9px) rotate(-45deg);
     }
 
+    /* === Section Base === */
     section {
-      min-height: 100vh;
       padding: 3rem 2rem 4rem;
-      max-width: 900px;
       margin: 6rem auto 3rem;
+      max-width: 1100px;
       display: flex;
       flex-direction: column;
-      background-color: var(--card-background);
-      border-radius: 12px;
+      gap: 1.2rem;
+      background: var(--card-background);
+      border-radius: 16px;
       box-shadow: 0 4px 15px var(--shadow-color);
       opacity: 0;
       transform: translateY(20px);
-      transition: all 0.6s ease;
-      user-select: text;
+      transition: all .6s ease;
     }
+
     section.visible {
       opacity: 1;
       transform: translateY(0);
     }
 
+    /* Simple grid helpers used later */
+    .grid {
+      display: grid;
+      gap: 1rem;
+    }
+
+    .grid-2 {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    /* === Hero === */
     #home {
       background: transparent;
       text-align: center;
       justify-content: center;
       align-items: center;
-      margin: 6rem auto 3rem;
-      max-width: none;
-      padding: 6rem 2rem 4rem;
-      color: var(--accent-color);
-      font-weight: 700;
-      user-select: text;
-      overflow: hidden;
-    }
-    #home h1 {
-      font-size: 4.5rem;
-      margin-bottom: 0.5rem;
-      opacity: 0;
-      transform: translateY(40px);
-      animation: fadeSlideIn 1s ease forwards 0.3s;
-      user-select: text;
-    }
-    /* Typing effect text */
-    #home p#typing-text {
-      font-size: 1.8rem;
-      color: var(--text-light);
-      font-weight: 500;
-      margin-top: 0.3rem;
-      user-select: none;
-      min-height: 2.4rem; /* prevent layout jump */
-      letter-spacing: 0.05em;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      max-width: 100%;
-      margin-left: auto;
-      margin-right: auto;
+      margin: 6rem auto 2rem;
+      max-width: 1200px;
+      padding: 7rem 2rem 4rem;
+      color: var(--text-color);
+      box-shadow: none;
     }
 
-    /* Text fade and slide in */
-    @keyframes fadeSlideIn {
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    #about {
-      text-align: center;
-    }
-    /* Profile Picture with professional double border frame */
-    #about img {
-      width: 260px;
-      height: 260px;
+    .avatar {
+      width: 200px;
+      height: 200px;
+      border-radius: 10%;
       object-fit: cover;
-      border-radius: 50%;
-      margin-bottom: 1.5rem;
-      border: 6px solid var(--accent-color);
-      box-shadow:
-        0 0 20px rgba(74, 144, 226, 0.7),
-        0 0 0 8px var(--card-background),
-        0 4px 20px rgba(0, 0, 0, 0.5);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-      user-select: none;
-    }
-    #about img:hover {
-      transform: scale(1.07);
-      box-shadow:
-        0 0 25px rgba(74, 144, 226, 0.9),
-        0 0 0 8px var(--card-background),
-        0 8px 28px rgba(0, 0, 0, 0.6);
+      border: 4px solid var(--accent-color);
+      box-shadow: 0 0 20px rgba(74, 144, 226, .6), 0 0 0 8px rgba(31, 31, 31, 1);
+      margin: 0 auto 1rem;
     }
 
-    .section-title {
-      font-size: 2.4rem;
-      margin-bottom: 1.5rem;
-      color: var(--accent-color);
-      text-transform: uppercase;
-      font-weight: 700;
-      align-self: flex-start;
-      user-select: none;
-    }
-    .section-content {
-      width: 100%;
-      max-width: 900px;
-      text-align: left;
-      line-height: 1.7;
-      font-size: 1.1rem;
+    .intro {
+      font-size: clamp(2rem, 3vw, 3.2rem);
       color: var(--text-light);
-      margin-bottom: 2rem;
-      user-select: text;
-    }
-    a {
-      color: var(--accent-color);
-      user-select: text;
-    }
-    a:hover {
-      color: #78a9ff;
+      font-weight: 800;
+      letter-spacing: 1px;
     }
 
-    /* Button */
+    .hero-title {
+      font-size: clamp(2rem, 4vw, 3.6rem);
+      font-weight: 900;
+      line-height: 1.15;
+      margin: .4rem auto 1rem;
+      color: #fff;
+    }
+
+    .hero-sub {
+      max-width: 900px;
+      line-height: 1.15;
+      margin: 0 auto 1.4rem;
+      color: #fff;
+      font-size: 2.5rem;
+    }
+
+    .cta-row {
+      display: flex;
+      gap: .8rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
     .btn {
       background: var(--accent-color);
       color: #121212;
-      padding: 0.6rem 1.4rem;
-      border-radius: 6px;
-      font-weight: 700;
+      padding: .7rem 1.2rem;
+      border-radius: 10px;
+      font-weight: 800;
       text-decoration: none;
-      margin-top: 1.5rem;
-      display: inline-block;
-      transition: background 0.3s ease, box-shadow 0.3s ease;
-      user-select: none;
-      box-shadow: 0 3px 8px rgba(74, 144, 226, 0.5);
+      display: inline-flex;
+      align-items: center;
+      gap: .5rem;
+      box-shadow: 0 3px 8px rgba(74, 144, 226, .5);
+      transition: .25s ease;
     }
+
     .btn:hover {
-      background: #78a9ff;
-      box-shadow: 0 5px 12px rgba(120, 169, 255, 0.7);
-      color: #121212;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 14px rgba(74, 144, 226, .6);
     }
 
-    /* Responsive home */
-    @media (max-width: 600px) {
-      #home h1 {
-        font-size: 3rem;
-      }
-      #home p#typing-text {
-        font-size: 1.3rem;
-      }
-      #about img {
-        width: 150px;
-        height: 150px;
-      }
-    }
-
-    /* Smaller devices - typing text wrap & resize */
-    @media (max-width: 480px) {
-      #home p#typing-text {
-        font-size: 1rem;
-        white-space: normal;
-        overflow: visible;
-        text-overflow: clip;
-        line-height: 1.2;
-        max-width: 260px;
-        margin-left: auto;
-        margin-right: auto;
-      }
-    }
-
-    section#skills i {
-  color: white;
-}
-i {
-  color: rgba(190, 214, 255, 0.859) !important;
-}
-
-    /* Skills */
-    .skill {
-      margin-bottom: 1.4rem;
-      width: 100%;
-      max-width: 900px;
-    }
-    .skill-name {
-      display: flex;
-      justify-content: space-between;
-      font-weight: 600;
-      margin-bottom: 0.4rem;
+    .btn-outline {
+      background: transparent;
       color: var(--accent-color);
-      font-size: 1rem;
-      user-select: text;
-    }
-    .skill-bar {
-      background: #333333;
-      border-radius: 20px;
-      overflow: hidden;
-      height: 15px;
-      box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.7);
-    }
-    .skill-level {
-      height: 100%;
-      background: var(--pr-color);
-      width: 0;
-      border-radius: 20px;
-      transition: width 1.2s ease-in-out;
-      box-shadow: 0 0 8px rgba(74, 144, 226, 0.7);
+      border: 2px solid var(--accent-color);
     }
 
-    /* Project & Experience Containers */
-    .card-container {
-      width: 100%;
-      max-width: 900px;
+    .btn-outline:hover {
+      background: #1e2a38;
+    }
+
+    /* === Section Titles === */
+    .section-title {
+      font-size: 2.2rem;
+      color: #fff;
       display: flex;
-      flex-direction: column;
-      gap: 1.5rem;
+      align-items: center;
+      gap: .6rem;
+      font-weight: 900;
+      letter-spacing: .4px;
     }
-    .card {
-      background: var(--card-background);
-      padding: 1.6rem 2rem;
-      border-radius: 12px;
-      box-shadow: 0 4px 15px var(--shadow-color);
-      transition: box-shadow 0.3s ease, color 0.3s ease;
+
+    .section-title i {
+      color: #fff;
+    }
+
+    .muted {
       color: var(--text-light);
-      user-select: text;
     }
+
+    /* === About grid / stats === */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1.2fr .8fr;
+      gap: 2rem;
+      align-items: start;
+    }
+
+    .about-card {
+      background: #191919;
+      border: 1px solid rgba(255, 255, 255, .04);
+      padding: 1.2rem 1.4rem;
+      border-radius: 14px;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, .35);
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1rem;
+      margin-top: .6rem;
+    }
+
+    .stat {
+      background: #171717;
+      border: 1px solid rgba(255, 255, 255, .06);
+      border-radius: 14px;
+      padding: 1.1rem;
+      text-align: center;
+    }
+
+    .stat .num {
+      font-size: 1.6rem;
+      font-weight: 900;
+      color: #fff;
+    }
+
+    .stat .label {
+      font-size: .85rem;
+      color: var(--text-light);
+    }
+
+    /* === Skills cards with chips (optional; keep your content if you add back) === */
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1rem;
+    }
+
+    .card {
+      background: #191919;
+      border: 1px solid rgba(255, 255, 255, .06);
+      border-radius: 16px;
+      padding: 1.2rem 1.2rem;
+      transition: box-shadow .25s ease, transform .25s ease;
+    }
+
     .card:hover {
-      box-shadow: 0 6px 25px rgba(74, 144, 226, 0.6);
-      color: var(--text-color);
+      box-shadow: 0 8px 22px rgba(74, 144, 226, .35);
+      transform: translateY(-2px);
     }
-    .card p {
-      margin-bottom: 0.8rem;
-      font-size: 1.05rem;
+
+    .card h4 {
+      color: #fff;
+      font-size: 1.1rem;
+      margin-bottom: .6rem;
     }
-    .card strong {
+
+    .chip-row {
+      display: flex;
+      gap: .6rem;
+      flex-wrap: wrap;
+    }
+
+    .chip {
+      background: #0f0f10;
+      border: 1px solid rgba(255, 255, 255, .08);
+      padding: .42rem .7rem;
+      border-radius: 999px;
+      font-size: .9rem;
+      color: var(--text-light);
+    }
+
+    /* === Projects grid === */
+    .projects {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+    }
+
+    .project {
+      display: block;
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .project p {
+      color: var(--text-light);
+    }
+
+    .tags {
+      margin-top: .4rem;
+      display: flex;
+      gap: .5rem;
+      flex-wrap: wrap;
+    }
+
+    .tag {
+      font-size: .82rem;
+      padding: .34rem .6rem;
+      border-radius: 999px;
+      background: #0f0f10;
+      border: 1px solid rgba(255, 255, 255, .08);
+      color: var(--text-light);
+    }
+
+    .project .link {
+      margin-top: .75rem;
+      display: inline-block;
+      color: var(--accent-color);
+      font-weight: 800;
+    }
+
+    .soon {
+      opacity: .6;
+      font-style: italic;
+    }
+
+    /* === Contact === */
+    .contact-grid {
+      display: grid;
+      gap: .7rem;
+    }
+
+    .contact-grid a {
       color: var(--accent-color);
       font-weight: 700;
-    }
-
-    /* Contact Section */
-    #contact .section-content {
-      text-align: left;
-      color: var(--text-light);
-      max-width: 900px;
-      margin: 0 auto;
-      display: flex;
-      flex-direction: column;
-      gap: 0.7rem;
-      font-size: 1.1rem;
-      user-select: text;
-    }
-    #contact a {
-      font-weight: 600;
-      color: var(--accent-color);
       word-break: break-word;
     }
-    #contact a:hover {
-      color: #78a9ff;
+
+    /* === Responsive === */
+    @media (max-width: 1024px) {
+      .cards {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .projects {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .about-grid {
+        grid-template-columns: 1fr;
+      }
     }
 
-    /* Footer */
-    footer {
-      background-color: #1b1b1b;
-      color: var(--text-light);
-      text-align: center;
-      padding: 1.8rem;
-      font-size: 0.9rem;
-      box-shadow: 0 -3px 10px var(--shadow-color);
-      user-select: none;
+    @media (max-width: 640px) {
+      .projects {
+        grid-template-columns: 1fr;
+      }
+
+      .cards {
+        grid-template-columns: 1fr;
+      }
+
+      .stats {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .hero-title {
+        font-size: clamp(2rem, 8vw, 3rem);
+      }
     }
 
-    /* MOBILE MENU - Hamburger and sliding right side nav */
-
+    /* Mobile slide-in nav */
     @media (max-width: 768px) {
       nav {
         position: fixed;
         top: 60px;
         right: 0;
-        width: 250px;
+        width: 260px;
         height: calc(100% - 60px);
-        background-color: #1b1b1b;
+        background: #1b1b1b;
         flex-direction: column;
         padding-top: 1.5rem;
         box-shadow: -4px 0 15px var(--shadow-color);
         border-radius: 12px 0 0 12px;
         transform: translateX(100%);
-        transition: transform 0.3s ease;
-        max-height: none;
-        overflow-y: auto;
+        transition: transform .3s ease;
         z-index: 1050;
       }
+
       nav.open {
         transform: translateX(0);
       }
+
       nav a {
         margin: 1rem 1.5rem;
-        font-size: 1.2rem;
+        font-size: 1.05rem;
         border-bottom: none !important;
-        white-space: normal;
       }
-      nav a.active,
-      nav a:hover {
-        border-bottom: none !important;
-        color: var(--accent-color);
-      }
+
       .hamburger {
         display: flex;
-        order: 2; /* push hamburger to right */
       }
     }
-
   </style>
 </head>
+
 <body>
   <header>
-    <h1>Hamim's Portfolio</h1>
+    <div class="brand">
+      <div class="brand-badge">H</div><span>Hamim</span>
+    </div>
     <nav id="nav-menu">
       <a href="#home" class="nav-link">Home</a>
       <a href="#about" class="nav-link">About</a>
@@ -437,188 +497,225 @@ i {
     </div>
   </header>
 
+  <!-- === HERO === -->
   <section id="home" class="visible">
-    <h1>HAMIM</h1>
-    <p id="typing-text"></p>
+    <img class="avatar" src="image.jpeg" alt="Hamim headshot" />
+    <p class="intro">Hi, I'm <strong>Hamim</strong>.</p>
+    <!-- this line was missing before; your script needs it -->
+    <p id="typing-text" class="hero-sub"></p>
+
+    
+    <div class="cta-row">
+      <a class="btn" href="#projects"><i class="fa-solid fa-eye"></i> View My Work</a>
+      <a class="btn btn-outline" href="Hamim_Resume.pdf" download><i class="fa-solid fa-download"></i> Download
+        Resume</a>
+    </div>
   </section>
 
+  <!-- === ABOUT === -->
   <section id="about" class="visible">
-    <div class="section-title"><i class="fas fa-user"></i> About Me</div>
-    <img src="image.jpeg" alt="Profile Picture" />
-    <div class="section-content">
-      <p>
-        Hello! I'm Hamim, a passionate Computer Science and Engineering student
-        at United International University. I'm currently in my third year and
-        have completed 80 credits with a CGPA of 3.94. I enjoy building
-        impactful software, educational games, and tools that solve real-world
-        problems. Java and full-stack development are my specialties, and I'm
-        always exploring new technologies.
-      </p>
-      <a href="Hamim_Resume.pdf" class="btn" download>Download Resume</a>
+    <h2 class="section-title"><i class="fas fa-user"></i> About Me</h2>
+    <div class="about-grid">
+      <div class="about-card">
+        <p class="muted">
+          Hello! I'm Hamim, a Computer Science and Engineering student at United International University (3rd year, 80
+          credits, CGPA 3.94). I enjoy building software, educational games, and tools that solve real problems. Java
+          and full-stack development are my specialties, and I'm always exploring new technologies.
+        </p>
+      </div>
+      <div class="about-card">
+        <div class="stats">
+          <div class="stat">
+            <div class="num">10+</div>
+            <div class="label">Projects Completed</div>
+          </div>
+          <div class="stat">
+            <div class="num">5+</div>
+            <div class="label">Technologies Mastered</div>
+          </div>
+          <div class="stat">
+            <div class="num">2</div>
+            <div class="label">Hardware Project</div>
+          </div>
+          <div class="stat">
+            <div class="num">∞</div>
+            <div class="label">Learning Curiosity</div>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
-
+  <!-- === SKILLS === -->
   <section id="skills" class="visible">
-  <div class="section-title"><i class="fas fa-tools"></i> Skills</div>
-  <div class="section-content">
-    <div class="skill">
-      <div class="skill-name">
-        <span><i class="fa-brands fa-java"></i> Java</span><span>95%</span>
-      </div>
-      <div class="skill-bar"><div class="skill-level" style="width: 95%"></div></div>
-    </div>
-
-    <div class="skill">
-      <div class="skill-name">
-        <span><i class="fa-brands fa-python"></i> Python</span><span>85%</span>
-      </div>
-      <div class="skill-bar"><div class="skill-level" style="width: 85%"></div></div>
-    </div>
-
-    <div class="skill">
-      <div class="skill-name">
-        <span><i class="fas fa-code"></i> C</span><span>95%</span>
-      </div>
-      <div class="skill-bar"><div class="skill-level" style="width: 95%"></div></div>
-    </div>
-
-    <div class="skill">
-      <div class="skill-name">
-        <span><i class="fas fa-laptop-code"></i> C++</span><span>85%</span>
-      </div>
-      <div class="skill-bar"><div class="skill-level" style="width: 85%"></div></div>
-    </div>
-
-    <div class="skill">
-      <div class="skill-name">
-        <span><i class="fa-brands fa-html5"></i> HTML</span><span>95%</span>
-      </div>
-      <div class="skill-bar"><div class="skill-level" style="width: 95%"></div></div>
-    </div>
-
-    <div class="skill">
-      <div class="skill-name">
-        <span><i class="fa-brands fa-css3-alt"></i> CSS</span><span>90%</span>
-      </div>
-      <div class="skill-bar"><div class="skill-level" style="width: 90%"></div></div>
-    </div>
-
-    <div class="skill">
-      <div class="skill-name">
-        <span><i class="fa-brands fa-js"></i> JavaScript</span><span>85%</span>
-      </div>
-      <div class="skill-bar"><div class="skill-level" style="width: 85%"></div></div>
-    </div>
-
-    <div class="skill">
-      <div class="skill-name">
-        <span><i class="fa-brands fa-node-js"></i> Node.js</span><span>80%</span>
-      </div>
-      <div class="skill-bar"><div class="skill-level" style="width: 80%"></div></div>
-    </div>
-
-    <div class="skill">
-      <div class="skill-name">
-        <span><i class="fas fa-database"></i> MySQL</span><span>85%</span>
-      </div>
-      <div class="skill-bar"><div class="skill-level" style="width: 85%"></div></div>
-    </div>
-
-    <div class="skill">
-      <div class="skill-name">
-        <span><i class="fas fa-desktop"></i> JavaFX</span><span>85%</span>
-      </div>
-      <div class="skill-bar"><div class="skill-level" style="width: 85%"></div></div>
-    </div>
-  </div>
-</section>
-
-
-  <section id="projects" class="visible">
-  <div class="section-title"><i class="fas fa-code"></i> Projects</div>
-  <div class="card-container">
-    <a href="https://github.com/hamim0047/CodeHunter" target="_blank" rel="noopener noreferrer" class="card" style="color: inherit; text-decoration: none;">
-      <p><strong>Code Hunter:</strong> A 2D JavaFX game that combines treasure hunting and programming quizzes with multiplayer features.</p>
-    </a>
-    <a href="https://github.com/hamim0047/SMART-VISION-STICK" target="_blank" rel="noopener noreferrer" class="card" style="color: inherit; text-decoration: none;">
-      <p><strong>Smart Blind Stick:</strong> IoT solution with ESP32-CAM, audio feedback, fall detection, and GPS alert system.</p>
-    </a>
-    <a href="https://github.com/hamim0047/Commune" target="_blank" rel="noopener noreferrer" class="card" style="color: inherit; text-decoration: none;">
-      <p><strong>Commune Web App:</strong> Full-stack app for community engagement with chat, marketplace, and user profiles.</p>
-    </a>
-    <a href="https://github.com/hamim0047/Bachelor-Hub" target="_blank" rel="noopener noreferrer" class="card" style="color: inherit; text-decoration: none;">
-      <p><strong>Bachelor Hub:</strong> Platform for university students to connect, share resources, and find roommates.</p>
-    </a>
-    <a href="https://github.com/hamim0047/TuitionFees_Calculator" target="_blank" rel="noopener noreferrer" class="card" style="color: inherit; text-decoration: none;">
-      <p><strong>Tuition Fee Calculator:</strong> Web app to calculate tuition fees based on credit and discount logic.</p>
-    </a>
-    <a href="https://github.com/hamim0047/SoccerBot" target="_blank" rel="noopener noreferrer" class="card" style="color: inherit; text-decoration: none;">
-      <p><strong>SoccerBot:</strong> Competitive robot built for soccer games</p>
-    </a>
-  </div>
-</section>
-
-
-  <section id="experience" class="visible">
-    <div class="section-title"><i class="fas fa-briefcase"></i> Experience</div>
-    <div class="card-container">
+    <h2 class="section-title"><i class="fas fa-tools"></i> Skills</h2>
+  
+    <div class="cards">
+      <!-- Languages & Core -->
       <div class="card">
-        <h3>Senior Executive - UIU Robotics Club</h3>
+        <h4>Languages & Core</h4>
+        <div class="chip-row">
+          <span class="chip"><i class="fa-brands fa-java"></i> Java </span>
+          <span class="chip"><i class="fa-brands fa-python"></i> Python </span>
+          <span class="chip"><i class="fas fa-code"></i> C </span>
+          <span class="chip"><i class="fas fa-laptop-code"></i> C++ </span>
+        </div>
       </div>
+  
+      <!-- Frontend -->
       <div class="card">
-        <h3>Executive - UIU Sports Club</h3>
+        <h4>Frontend</h4>
+        <div class="chip-row">
+          <span class="chip"><i class="fa-brands fa-html5"></i> HTML </span>
+          <span class="chip"><i class="fa-brands fa-css3-alt"></i> CSS </span>
+          <span class="chip"><i class="fa-brands fa-js"></i> JavaScript </span>
+          <span class="chip"><i class="fa-brands fa-react"></i> React.js</span>
+          <span class="chip">Tailwind CSS</span>
+        </div>
       </div>
+  
+      <!-- Backend & DB -->
       <div class="card">
-        <h3>Volunteer - UIU CSE Project Show</h3>
+        <h4>Backend & DB</h4>
+        <div class="chip-row">
+          <span class="chip"><i class="fa-brands fa-node-js"></i> Node.js </span>
+          <span class="chip">Express.js</span>
+          <span class="chip"><i class="fas fa-database"></i> MySQL </span>
+        </div>
       </div>
+  
+      <!-- Frameworks -->
       <div class="card">
-        <h3>Participant - KUET CSE Fest (SoccerBot)</h3>
-      </div>
-      <div class="card">
-        <h3>Participant - UIU CSE Fest (SoccerBot)</h3>
+        <h4>Frameworks</h4>
+        <div class="chip-row">
+          <span class="chip"><i class="fas fa-desktop"></i> JavaFX </span>
+        </div>
       </div>
     </div>
   </section>
 
+
+
+  <!-- === PROJECTS (wrapped correctly) === -->
+  <section id="projects" class="visible">
+    <h2 class="section-title"><i class="fas fa-code"></i> Projects</h2>
+    <div class="projects">
+      <a class="card project" href="https://github.com/hamim0047/CodeHunter" target="_blank" rel="noopener noreferrer">
+        <h4>Code Hunter</h4>
+        <p class="muted">A 2D JavaFX game that combines treasure hunting and programming quizzes with multiplayer
+          features.</p>
+        <div class="tags"><span class="tag">JavaFX</span><span class="tag">Java</span></div>
+      </a>
+  
+      <a class="card project" href="https://github.com/hamim0047/SMART-VISION-STICK" target="_blank"
+        rel="noopener noreferrer">
+        <h4>Smart Blind Stick</h4>
+        <p class="muted">IoT solution with ESP32-CAM, audio feedback, fall detection, and GPS alert system.</p>
+        <div class="tags"><span class="tag">ESP32</span><span class="tag">IoT</span></div>
+      </a>
+  
+      <a class="card project" href="https://github.com/hamim0047/Commune" target="_blank" rel="noopener noreferrer">
+        <h4>Commune Web App</h4>
+        <p class="muted">Full-stack app for community engagement with chat, marketplace, and user profiles.</p>
+        <div class="tags"><span class="tag">Full-stack</span></div>
+      </a>
+  
+      <a class="card project" href="https://github.com/hamim0047/Bachelor-Hub" target="_blank" rel="noopener noreferrer">
+        <h4>Bachelor Hub</h4>
+        <p class="muted">Platform for university students to connect, share resources, and find roommates.</p>
+        <div class="tags"><span class="tag">Web</span></div>
+      </a>
+  
+      <a class="card project" href="https://github.com/hamim0047/TuitionFees_Calculator" target="_blank"
+        rel="noopener noreferrer">
+        <h4>Tuition Fee Calculator</h4>
+        <p class="muted">Web app to calculate tuition fees based on credit and discount logic.</p>
+        <div class="tags"><span class="tag">JavaScript</span></div>
+      </a>
+  
+      <a class="card project" href="https://github.com/hamim0047/SoccerBot" target="_blank" rel="noopener noreferrer">
+        <h4>SoccerBot</h4>
+        <p class="muted">Competitive robot built for soccer games</p>
+        <div class="tags"><span class="tag">Robotics</span></div>
+      </a>
+    </div>
+  </section>
+
+
+  <!-- === EXPERIENCE === -->
+  <section id="experience" class="visible">
+    <h2 class="section-title"><i class="fas fa-briefcase"></i> Experience</h2>
+    <div class="grid grid-2">
+      <div class="card">
+        <h4>Senior Executive - UIU Robotics Club</h4>
+      </div>
+      <div class="card">
+        <h4>Executive - UIU Sports Club</h4>
+      </div>
+      <div class="card">
+        <h4>Volunteer - UIU CSE Project Show</h4>
+      </div>
+      <div class="card">
+        <h4>Participant - KUET CSE Fest (SoccerBot)</h4>
+      </div>
+      <div class="card">
+        <h4>Participant - UIU CSE Fest (SoccerBot)</h4>
+      </div>
+    </div>
+  </section>
+
+  <!-- === CONTACT === -->
   <section id="contact" class="visible">
-  <div class="section-title"><i class="fas fa-envelope"></i> Contact</div>
-  <div class="section-content">
-    <p>
-      <i class="fas fa-envelope"></i>
-      Email: <a href="mailto:hamim2310047@bscse.uiu.ac.bd">hamim2310047@bscse.uiu.ac.bd</a>
-    </p>
-    <p>
-      <i class="fab fa-github"></i>
-      GitHub: <a href="https://github.com/hamim0047" target="_blank">github.com/hamim0047</a>
-    </p>
-    <p>
-      <i class="fab fa-linkedin"></i>
-      LinkedIn: <a href="https://linkedin.com/in/muhammad-hamim-196466277/" target="_blank">linkedin.com/in/muhammad-hamim</a>
-    </p>
-  </div>
-</section>
+    <h2 class="section-title"><i class="fas fa-envelope"></i> Contact</h2>
+    <div class="contact-grid">
+      <p><i class="fas fa-envelope"></i> Email: <a
+          href="mailto:hamim2310047@bscse.uiu.ac.bd">hamim2310047@bscse.uiu.ac.bd</a></p>
+      <p><i class="fab fa-github"></i> GitHub: <a href="https://github.com/hamim0047"
+          target="_blank">github.com/hamim0047</a></p>
+      <p><i class="fab fa-linkedin"></i> LinkedIn: <a href="https://linkedin.com/in/muhammad-hamim-196466277/"
+          target="_blank">linkedin.com/in/muhammad-hamim</a></p>
+    </div>
+  </section>
 
-
-  <footer>
+  <footer
+    style="background:#1b1b1b; color:var(--text-light); text-align:center; padding:1.6rem; font-size:.95rem; box-shadow:0 -3px 10px var(--shadow-color);">
     &copy; 2025 Hamim All rights reserved.
   </footer>
 
   <script>
-    // Typing animation for #typing-text
-    const typingText = "Full-Stuck Developer | Problem Solver";
-    const typingElement = document.getElementById("typing-text");
+    // Typing animation (same content)
+    const typingText = "Full-Stuck Developer | Undergraduate Teaching Assistant | UI/UX Designer | Problem Solver";
+      const typingElement = document.getElementById("typing-text");
 
-    let index = 0;
-    function type() {
-      if (index <= typingText.length) {
-        typingElement.textContent = typingText.slice(0, index);
-        index++;
-        setTimeout(type, 100);
-      }
-    }
-    type();
 
-    // Hamburger toggle
+      (function () {
+        if (!typingElement) return;
+        const phrases = typingText.split(" | ").map(s => s.trim());
+        let p = 0, i = 0, deleting = false;
+
+
+        function tick() {
+          const current = phrases[p];
+          typingElement.textContent = current.slice(0, i);
+
+
+          if (!deleting && i < current.length) {
+            i++;
+            setTimeout(tick, 90);
+          } else if (!deleting && i === current.length) {
+            setTimeout(() => { deleting = true; setTimeout(tick, 60); }, 900);
+          } else if (deleting && i > 0) {
+            i--;
+            setTimeout(tick, 45);
+          } else {
+            deleting = false;
+            p = (p + 1) % phrases.length;
+            setTimeout(tick, 200);
+          }
+        }
+        tick();
+      })();
+
+    // Mobile nav toggle
     const hamburger = document.getElementById("hamburger");
     const navMenu = document.getElementById("nav-menu");
     const navLinks = document.querySelectorAll("nav a");
@@ -627,8 +724,6 @@ i {
       hamburger.classList.toggle("active");
       navMenu.classList.toggle("open");
     });
-
-    // Close menu on link click (mobile)
     navLinks.forEach((link) => {
       link.addEventListener("click", () => {
         if (navMenu.classList.contains("open")) {
@@ -638,15 +733,14 @@ i {
       });
     });
 
-    // Highlight active nav link on scroll
+    // Active link on scroll
     window.addEventListener("scroll", () => {
       const scrollY = window.pageYOffset;
       navLinks.forEach((link) => {
         const section = document.querySelector(link.hash);
-        if (
-          section.offsetTop <= scrollY + 70 &&
-          section.offsetTop + section.offsetHeight > scrollY + 70
-        ) {
+        if (!section) return;
+        if (section.offsetTop <= scrollY + 80 &&
+          section.offsetTop + section.offsetHeight > scrollY + 80) {
           link.classList.add("active");
         } else {
           link.classList.remove("active");
@@ -655,4 +749,5 @@ i {
     });
   </script>
 </body>
+
 </html>
