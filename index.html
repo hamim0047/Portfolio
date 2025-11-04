@@ -5,6 +5,18 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Hamim's Portfolio</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,
+  <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'>
+    <defs>
+      <linearGradient id='grad' x1='0%' y1='0%' x2='100%' y2='100%'>
+        <stop offset='0%' stop-color='%232289f7'/>
+        <stop offset='100%' stop-color='%23c8dff7'/>
+      </linearGradient>
+    </defs>
+    <rect width='100' height='100' rx='20' fill='%230d1c2c'/>
+    <text x='50%' y='65%' font-size='60' font-family='Montserrat, sans-serif'
+          font-weight='900' fill='url(%23grad)' text-anchor='middle'>H</text>
+  </svg>">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
 
   <style>
@@ -908,6 +920,49 @@
       filter: brightness(1.04);
     }
 
+    /* === Achievements === */
+    .achievements-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.5rem;
+    }
+
+    .achievement-card .title {
+      color: #fff;
+      font-weight: 800;
+      font-size: 1.1rem;
+      margin-bottom: .35rem;
+    }
+
+    .achievement-card .desc {
+      color: var(--text-light);
+      line-height: 1.7;
+    }
+
+    .badges {
+      margin-top: .8rem;
+      display: flex;
+      gap: .5rem;
+      flex-wrap: wrap;
+    }
+
+    .badge {
+      font-size: .85rem;
+      padding: .35rem .7rem;
+      border-radius: 8px;
+      background: rgba(52, 145, 244, .1);
+      border: 1px solid rgba(52, 145, 244, .2);
+      color: var(--text-light);
+    }
+
+    /* Responsive for achievements */
+    @media (max-width:1024px) {
+      .achievements-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+
     /* === Footer === */
     footer {
       background: var(--card-background);
@@ -1135,6 +1190,7 @@
       <a href="#skills" class="nav-link"><i class="fas fa-tools"></i> Skills</a>
       <a href="#projects" class="nav-link"><i class="fas fa-briefcase"></i> Projects</a>
       <a href="#experience" class="nav-link"><i class="fas fa-award"></i> Experience</a>
+      <a href="#achievements" class="nav-link"><i class="fas fa-trophy"></i> Achievements</a>
       <a href="#contact" class="nav-link"><i class="fas fa-envelope"></i> Contacts</a>
       <a href="hamim_resume.pdf" download class="nav-link nav-resume"><i class="fas fa-download"></i> Resume</a>
     </nav>
@@ -1300,32 +1356,148 @@
   </section>
 
   <!-- EXPERIENCE -->
+  <!-- EXPERIENCE -->
   <section id="experience">
     <div class="section-header">
       <h2 class="section-title"><i class="fas fa-briefcase"></i> Experience</h2>
       <p class="section-subtitle">My professional journey</p>
     </div>
+  
     <div class="grid grid-2">
+      <!-- UTA -->
       <div class="card">
-        <h4>Undergraduate Teaching Assistant - UIU</h4>
+        <h4>Undergraduate Teaching Assistant — UIU</h4>
+        <p class="section-subtitle" style="margin:.25rem 0 1rem;">
+          <span class="tag">Aug 2025 — Present</span>
+        </p>
+        <ul style="margin-left:1rem;">
+          <li>Lead lab sessions on OOP, DS, and basic algorithms; reinforced concepts through hands-on tasks.</li>
+          <li>Reviewed assignments, provided structured feedback, and coached peers on clean, testable code.</li>
+          <li>Collaborated with faculty to refine rubrics and run debugging/clinic hours before assessments.</li>
+        </ul>
       </div>
+  
+      <!-- Executive (Events) — UIU Robotics -->
       <div class="card">
-        <h4>Senior Executive - UIU Robotics Club</h4>
+        <h4>Executive (Events) — UIU Robotics Club</h4>
+        <p class="section-subtitle" style="margin:.25rem 0 1rem;">
+          <span class="tag">Sep 2024 — Present</span>
+        </p>
+        <ul style="margin-left:1rem;">
+          <li>Plan and run workshops, hackathons, and intra-university robotics meets end-to-end.</li>
+          <li>Coordinate logistics, speaker outreach, and stakeholder comms to ensure smooth execution.</li>
+          <li>Develop event playbooks and checklists to standardize processes and improve turnaround.</li>
+        </ul>
       </div>
+  
+      <!-- Sub-Executive — UIU Robotics -->
       <div class="card">
-        <h4>Executive - UIU Sports Club</h4>
+        <h4>Sub-Executive — UIU Robotics Club</h4>
+        <p class="section-subtitle" style="margin:.25rem 0 1rem;">
+          <span class="tag">Sep 2023 — Sep 2024</span>
+        </p>
+        <ul style="margin-left:1rem;">
+          <li>Assisted in workshop setup (electronics, firmware flashing, testing rigs) and participant support.</li>
+          <li>Maintained build documentation and BoMs; helped teams iterate on SoccerBot control tuning.</li>
+          <li>Supported social/ops tasks: registrations, venue prep, and on-day coordination.</li>
+        </ul>
       </div>
+  
+      <!-- Executive — UIU Sports Club -->
       <div class="card">
-        <h4>Volunteer - UIU CSE Project Show</h4>
+        <h4>Executive — UIU Sports Club</h4>
+        <p class="section-subtitle" style="margin:.25rem 0 1rem;">
+          <span class="tag">Jan 2024 — Present</span>
+        </p>
+        <ul style="margin-left:1rem;">
+          <li>Organize inter-department tournaments; manage schedules, brackets, and volunteer rosters.</li>
+          <li>Streamline event operations (venue bookings, equipment, scorekeeping, comms).</li>
+          <li>Drive student engagement through concise updates and post-event recaps.</li>
+        </ul>
       </div>
+  
+      <!-- Keep your other entries (optional, condensed) -->
       <div class="card">
-        <h4>Participant - KUET CSE Fest (SoccerBot)</h4>
+        <h4>Volunteer — UIU CSE Project Show</h4>
+        <p class="section-subtitle" style="margin:.25rem 0 1rem;">
+          <span class="tag">Events Support</span>
+        </p>
+        <ul style="margin-left:1rem;">
+          <li>Helped with booth setup, live demos, and participant guidance during showcase days.</li>
+        </ul>
       </div>
+  
       <div class="card">
-        <h4>Participant - UIU CSE Fest (SoccerBot)</h4>
+        <h4>Participant — KUET CSE Fest (SoccerBot)</h4>
+        <p class="section-subtitle" style="margin:.25rem 0 1rem;">
+          <span class="tag">Competition</span>
+        </p>
+        <ul style="margin-left:1rem;">
+          <li>Contributed to hardware integration and match-day diagnostics for consistent performance.</li>
+        </ul>
+      </div>
+  
+      <div class="card">
+        <h4>Participant — UIU CSE Fest (SoccerBot)</h4>
+        <p class="section-subtitle" style="margin:.25rem 0 1rem;">
+          <span class="tag">Competition</span>
+        </p>
+        <ul style="margin-left:1rem;">
+          <li>Contributed to hardware integration and match-day diagnostics for consistent performance.</li>
+        </ul>
       </div>
     </div>
   </section>
+
+  <!-- ACHIEVEMENTS -->
+  <section id="achievements">
+    <div class="section-header">
+      <h2 class="section-title"><i class="fas fa-trophy"></i> Achievements</h2>
+      <p class="section-subtitle">Highlights from competitions and showcases</p>
+    </div>
+
+    <div class="achievements-grid">
+      <div class="card achievement-card">
+        <div class="title">1st Runner-Up — AOOP (Code Hunter)</div>
+        <p class="desc">
+          Awarded at the UIU CSE Project Show for the <em>Code Hunter</em> JavaFX game, recognized for design,
+          gameplay mechanics, and code quality.
+        </p>
+        <div class="badges">
+          <span class="badge"><i class="fas fa-award"></i> UIU CSE Project Show</span>
+          <span class="badge"><i class="fas fa-gamepad"></i> JavaFX</span>
+          <span class="badge"><i class="fas fa-code"></i> AOOP</span>
+        </div>
+      </div>
+
+      <div class="card achievement-card">
+        <div class="title">7th Runner-Up — Systems Analysis &amp; Design Lab (Healthcare App)</div>
+        <p class="desc">
+          Placed at the UIU CSE Project Show for a Healthcare app built with solid Systems Analysis &amp; Design
+          documentation, architecture, and implementation discipline.
+        </p>
+        <div class="badges">
+          <span class="badge"><i class="fas fa-award"></i> UIU CSE Project Show</span>
+          <span class="badge"><i class="fas fa-heartbeat"></i> Healthcare</span>
+          <span class="badge"><i class="fas fa-sitemap"></i> Systems Analysis &amp; Design</span>
+        </div>
+      </div>
+
+      <div class="card achievement-card">
+        <div class="title">Top 10 — SoccerBot Competition (KUET CSE Fest)</div>
+        <p class="desc">
+          Ranked among the top 10 teams at KUET CSE Fest for the <em>SoccerBot</em> project — a competitive robot designed
+          for autonomous soccer gameplay, built through iterative control tuning and teamwork.
+        </p>
+        <div class="badges">
+          <span class="badge"><i class="fas fa-robot"></i> Robotics</span>
+          <span class="badge"><i class="fas fa-futbol"></i> SoccerBot</span>
+          <span class="badge"><i class="fas fa-university"></i> KUET CSE Fest</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
 
   <!-- CONTACT -->
   <section id="contact">
